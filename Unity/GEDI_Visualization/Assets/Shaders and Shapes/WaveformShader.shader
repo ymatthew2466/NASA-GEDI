@@ -80,19 +80,26 @@ Shader "Custom/WaveformShader"
 
                 // static height threshold
                 float height1 = 5.0; 
-                float height2 = 8.0;
-                float height3 = 10.0;
-                float height4 = 15.0; 
-                float height5 = 20.0;
+                float height2 = 15.0;
+                float height3 = 30.0;
+                float height4 = 50.0; 
+                // float height5 = 20.0;
                 // above: red
 
                 // colors
-                fixed3 color1 = fixed3(1.0, 0.6, 0.0);        // Orange
-                fixed3 color2 = fixed3(0.6, 0.6, 0.6);        // Gray
+                // fixed3 color1 = fixed3(1.0, 0.3, 0.3);        // Red
+                fixed3 color1 = fixed3(1.0, 0.0, 0.0);        // Red
+                fixed3 color2 = fixed3(0.97, 0.98, 0.157);    // Yellow
                 fixed3 color3 = fixed3(0.3, 1.0, 0.3);        // Green
-                fixed3 color4 = fixed3(0.97, 0.98, 0.157);    // Yellow
+                fixed3 color4 = fixed3(0.3, 0.3, 1.0);        // Blue
                 fixed3 color5 = fixed3(1.0, 0.45, 0.925);     // Pink
-                fixed3 color6 = fixed3(1.0, 0.3, 0.3);        // Red
+
+                // fixed3 color1 = fixed3(1.0, 0.6, 0.0);        // Orange
+                // fixed3 color2 = fixed3(0.6, 0.6, 0.6);        // Gray
+                // fixed3 color3 = fixed3(0.3, 1.0, 0.3);        // Green
+                // fixed3 color4 = fixed3(0.97, 0.98, 0.157);    // Yellow
+                // fixed3 color5 = fixed3(1.0, 0.45, 0.925);     // Pink
+                // fixed3 color6 = fixed3(1.0, 0.3, 0.3);        // Red
 
                 fixed3 baseColor;
 
@@ -115,16 +122,22 @@ Shader "Custom/WaveformShader"
                     float t = (currentHeight - height3) / (height4 - height3);
                     baseColor = lerp(color3, color4, t);
                 }
-                else if (currentHeight < height5)
-                {
-                    float t = (currentHeight - height4) / (height5 - height4);
-                    baseColor = lerp(color4, color5, t);
-                }
                 else
                 {
-                    float t = (currentHeight - height5) / (height5 - height4);
-                    baseColor = lerp(color5, color6, t);
+                    float t = (currentHeight - height4) / (height4 - height3);
+                    baseColor = lerp(color4, color5, t);
+
                 }
+                // else if (currentHeight < height5)
+                // {
+                //     float t = (currentHeight - height4) / (height5 - height4);
+                //     baseColor = lerp(color4, color5, t);
+                // }
+                // else
+                // {
+                //     float t = (currentHeight - height5) / (height5 - height4);
+                //     baseColor = lerp(color5, color6, t);
+                // }
 
                 // Calculate stripe based on absolute height
                 float stripePhase = floor(currentHeight * _StripeFrequency);

@@ -384,7 +384,8 @@ public class WaveformVisualizer : MonoBehaviour
             float y = ((segments - 1 - i) / (float)(segments - 1)) * height;
 
             // float normalizedHeight = (segments > 1) ? i / (float)(segments - 1) : 0f;
-            float normalizedHeight = (segments > 1) ? i / ((segments - 1 - i) / (float)(segments - 1)) : 0f;
+            // float normalizedHeight = (segments > 1) ? i / ((segments - 1 - i) / (float)(segments - 1)) : 0f;
+            float normalizedHeight = (segments > 1) ? (segments - 1 - i) / (float)(segments - 1) : 0f;
 
             for (int j = 0; j < circleResolution; j++)
             {

@@ -169,14 +169,14 @@ MonoBehaviour:
   csvParser: {fileID: 1389572230}
   waveformMaterial: {fileID: 2100000, guid: d453bc3c660744436b3f06ccbc560685, type: 2}
   terrainMaterial: {fileID: 2100000, guid: 0b170764429d7486d9f0b052f33e86b7, type: 2}
-  positionScale: 0.012
+  positionScale: 0.001
   elevationScale: 0.00001
   cylinderSum: 120
   gridCellSize: 7.1
   selectedRHField: 2
   visualizePopulated: 1
   waveformHeightThreshold: 0
-  waveformEnergyThreshold: 1
+  waveformEnergyThreshold: 5
 --- !u!114 &66978045
 MonoBehaviour:
   m_ObjectHideFlags: 0
