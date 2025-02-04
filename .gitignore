@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# But don't ignore these directories
+!Data/
+!Unity/
+
+# Ignore .pkl files even in tracked directories
+**/*.pkl
+
+# Don't ignore .gitignore itself
+!.gitignore
