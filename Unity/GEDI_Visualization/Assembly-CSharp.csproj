@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CSVParser.cs" />
     <Compile Include="Assets\Scripts\WaveformVisualizer.cs" />
+    <Compile Include="Assets\Scripts\CameraControllerMouse.cs" />
     <Compile Include="Assets\Scripts\HMDController.cs" />
     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\OldWaveformViz.cs" />
