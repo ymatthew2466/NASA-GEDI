@@ -1,9 +1,10 @@
 # Ignore everything
 *
+!*/
 
-# But don't ignore these directories
-!Data/
-!Unity/
+# Don't ignore these directories and their contents
+!Data/**
+!Unity/**
 
 # Ignore .pkl files even in tracked directories
 **/*.pkl
