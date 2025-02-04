@@ -3,18 +3,20 @@ import pandas as pd
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-with open('/Users/matthewyoon/Documents/cs2370/GEDI/Data Preprocessing/Amazon_cs237_2024.pkl', 'rb') as f:
+with open('./GEDI_sample_for_CS237_2024.pkl', 'rb') as f:
     data = pickle.load(f)
 
 downsample_factor = 20
 waveform_downsample_factor = 1
 
+
+def area_filter(lng, lat):
+    # return (lng>-60.45) & (lng<-60.25) & (lat>2.25) & (lat<2.45)
+    # return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
+    return (lng>-82.7) & (lng<-82.6) & (lat>51.7) & (lat<51.8)
+
 data_list = []
 for i in range(len(data['prop'])):
-
-    if i % downsample_factor != 0:
-        continue
-    
 
     entry = data['prop'][i]
 
@@ -23,11 +25,15 @@ for i in range(len(data['prop'])):
     longitude = entry['geolocation/longitude_bin0']
     elevation = entry['geolocation/elevation_bin0']
 
+    if not area_filter(longitude, latitude):
+        continue
+
     # rh metrics
     rh_2 = data['rh'][i][2]
     rh_50 = data['rh'][i][50]
     rh_98 = data['rh'][i][98]
     rh_waveform = data['rh'][i]
+    rh_waveform = rh_waveform/rh_waveform.sum()*30
     rh_waveform_str = ','.join(map(str, rh_waveform))
 
     # raw waveform
@@ -50,7 +56,7 @@ for i in range(len(data['prop'])):
 
 
 df = pd.DataFrame(data_list)
-df.to_csv('rainforest.csv', index=False)
+df.to_csv('forest.csv', index=False)
 
 # if isinstance(data, list):
 #     print(f"The file contains a list with {len(data)} elements.")
