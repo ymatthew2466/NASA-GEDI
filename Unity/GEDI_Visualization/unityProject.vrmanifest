@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.gedi_visualization.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Brown\\Research\\GEDI_experiments\\GEDI_footprint_3D\\Unity\\GEDI_Visualization\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "GEDI_Visualization [Testing]"
+        }
+      }
+    }
+  ]
+}

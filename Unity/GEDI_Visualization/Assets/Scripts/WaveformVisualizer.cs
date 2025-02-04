@@ -8,6 +8,11 @@ public enum RHValue
     RH50,
     RH98
 }
+public static class Globals
+{
+    public const float SCALE = 0.02f;
+}
+
 
 public class WaveformVisualizer : MonoBehaviour
 {
@@ -101,9 +106,9 @@ public class WaveformVisualizer : MonoBehaviour
         float cosLat = Mathf.Cos(referenceLatitude * Mathf.Deg2Rad);
         float lonInMeters = lonDiff * 111000f * cosLat;
 
-        float x = lonInMeters * positionScale;
-        float y = elevDiff * elevationScale;
-        float z = latInMeters * positionScale;
+        float x = lonInMeters * positionScale * Globals.SCALE;
+        float y = elevDiff * elevationScale * Globals.SCALE;
+        float z = latInMeters * positionScale * Globals.SCALE;
 
         return new Vector3(x, y, z);
     }
@@ -366,75 +371,75 @@ public class WaveformVisualizer : MonoBehaviour
         return waveformValues;
     }
     private Mesh GenerateCylinderMesh(float[] waveformValues, float height)
+{
+    int segments = waveformValues.Length;  // Number of layers
+    List<Vector3> vertices = new List<Vector3>();
+    List<int> triangles = new List<int>();
+    List<Vector2> uvs = new List<Vector2>();
+    List<Vector2> heights = new List<Vector2>();
+
+    int circleResolution = 12;  // Number of points in the cross section
+    float angleIncrement = Mathf.PI * 2 / circleResolution;
+
+
+    // Generate vertices and UVs for each cross section
+    for (int i = 0; i < segments; i++)
     {
-        int segments = waveformValues.Length;  // Number of layers
-        List<Vector3> vertices = new List<Vector3>();
-        List<int> triangles = new List<int>();
-        List<Vector2> uvs = new List<Vector2>();
-        List<Vector2> heights = new List<Vector2>();
+        float radius = waveformValues[i];
+        // Invert the vertical order:
+        float y = ((segments - 1 - i) / (float)(segments - 1) - 0.1172f) * 76.8f * Globals.SCALE;
+        
+        // float normalizedHeight = (segments > 1) ? i / (float)(segments - 1) : 0f;
+        float normalizedHeight = (segments > 1) ? (segments - 1 - i) / (float)(segments - 1) : 0f;
 
-        int circleResolution = 12;  // Number of points in the cross section
-        float angleIncrement = Mathf.PI * 2 / circleResolution;
-
-        // Generate vertices and UVs for each cross section
-        for (int i = 0; i < segments; i++)
+        for (int j = 0; j < circleResolution; j++)
         {
-            float radius = waveformValues[i];
-            // Invert the vertical order:
-            float y = ((segments - 1 - i) / (float)(segments - 1)) * height;
+            float angle = j * angleIncrement;
+            float x = radius * Mathf.Cos(angle);
+            float z = radius * Mathf.Sin(angle);
 
-            // float normalizedHeight = (segments > 1) ? i / (float)(segments - 1) : 0f;
-            // float normalizedHeight = (segments > 1) ? i / ((segments - 1 - i) / (float)(segments - 1)) : 0f;
-            float normalizedHeight = (segments > 1) ? (segments - 1 - i) / (float)(segments - 1) : 0f;
-
-            for (int j = 0; j < circleResolution; j++)
-            {
-                float angle = j * angleIncrement;
-                float x = radius * Mathf.Cos(angle);
-                float z = radius * Mathf.Sin(angle);
-
-                vertices.Add(new Vector3(x, y, z));
-                uvs.Add(new Vector2(0, normalizedHeight));
-                heights.Add(new Vector2(height, 0));
-            }
+            vertices.Add(new Vector3(x, y, z));
+            uvs.Add(new Vector2(0, normalizedHeight));
+            heights.Add(new Vector2(76.8f, 0));
         }
-
-        // Generate triangles between consecutive cross sections
-        for (int i = 0; i < segments - 1; i++)
-        {
-            int startIndex = i * circleResolution;
-            int nextIndex = (i + 1) * circleResolution;
-
-            for (int j = 0; j < circleResolution; j++)
-            {
-                int current = startIndex + j;
-                int next = startIndex + (j + 1) % circleResolution;
-                int top = nextIndex + j;
-                int topNext = nextIndex + (j + 1) % circleResolution;
-
-                triangles.Add(current);
-                triangles.Add(next);
-                triangles.Add(top);
-
-                triangles.Add(next);
-                triangles.Add(topNext);
-                triangles.Add(top);
-            }
-        }
-
-        // Create mesh
-        Mesh mesh = new Mesh
-        {
-            name = "WaveformCylinderMesh",
-            vertices = vertices.ToArray(),
-            triangles = triangles.ToArray(),
-            uv = uvs.ToArray(),
-            uv2 = heights.ToArray()
-        };
-        mesh.RecalculateNormals();
-
-        return mesh;
     }
+
+    // Generate triangles between consecutive cross sections
+    for (int i = 0; i < segments - 1; i++)
+    {
+        int startIndex = i * circleResolution;
+        int nextIndex = (i + 1) * circleResolution;
+
+        for (int j = 0; j < circleResolution; j++)
+        {
+            int current = startIndex + j;
+            int next = startIndex + (j + 1) % circleResolution;
+            int top = nextIndex + j;
+            int topNext = nextIndex + (j + 1) % circleResolution;
+
+            triangles.Add(current);
+            triangles.Add(next);
+            triangles.Add(top);
+
+            triangles.Add(next);
+            triangles.Add(topNext);
+            triangles.Add(top);
+        }
+    }
+
+    // Create mesh
+    Mesh mesh = new Mesh
+    {
+        name = "WaveformCylinderMesh",
+        vertices = vertices.ToArray(),
+        triangles = triangles.ToArray(),
+        uv = uvs.ToArray(),
+        uv2 = heights.ToArray()
+    };
+    mesh.RecalculateNormals();
+
+    return mesh;
+}
 
     // private Mesh GenerateCylinderMesh(float[] waveformValues, float height)
     // {
