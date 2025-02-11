@@ -43,7 +43,7 @@ public class WaveformVisualizer : MonoBehaviour
     public float waveformHeightThreshold = 5f; // Minimum height in meters for waveforms
     public float waveformEnergyThreshold = 5f; // Only render parts of the waveform above this energy
 
-
+    private Dictionary<Vector2Int, Vector3> terrainPoints = new Dictionary<Vector2Int, Vector3>();
     private float referenceLatitude;
     private float referenceLongitude;
     private float referenceElevation;
@@ -110,7 +110,8 @@ public class WaveformVisualizer : MonoBehaviour
         float y = elevDiff * elevationScale * Globals.SCALE;
         float z = latInMeters * positionScale * Globals.SCALE;
 
-        return new Vector3(x, y, z);
+        // return new Vector3(x, y, z);
+        return new Vector3(x, elevation*0.01f, z);
     }
 
     private bool IsHeightValid(float height)
@@ -178,7 +179,6 @@ public class WaveformVisualizer : MonoBehaviour
                     Debug.Log($"Skipping waveform at ({point.latitude}, {point.longitude}) with height {selectedRH}m below threshold.");
                     continue;
                 }
-
                 Vector3 position = LatLong2Unity(point.latitude, point.longitude, point.elevation);
                 lats = lats + ", " + point.latitude;
 
@@ -217,6 +217,8 @@ public class WaveformVisualizer : MonoBehaviour
                 CreateCylinder(position, selectedPoint.rawWaveform, selectedRH);
             }
         }
+        CreateTerrainMesh(terrainPoints);
+        Debug.Log($"lat: {referenceLatitude}, long: {referenceLongitude}");
     }
 
     // private void CreateCylinder(Vector3 position, string rawWaveform, float height)
@@ -281,6 +283,15 @@ public class WaveformVisualizer : MonoBehaviour
 
         Mesh mesh = GenerateCylinderMesh(truncatedWaveform, height);
         meshFilter.mesh = mesh;
+
+        // Add point to terrain points using more precise grid key
+        Vector2Int gridKey = new Vector2Int(
+            Mathf.RoundToInt(position.x * 1000),
+            Mathf.RoundToInt(position.z * 1000)
+        );
+        
+        // Store the ground position (not the top of the waveform)
+        terrainPoints[gridKey] = position;
     }
 
     private float[] ParseRawWaveform(string waveform)
@@ -371,144 +382,191 @@ public class WaveformVisualizer : MonoBehaviour
         return waveformValues;
     }
     private Mesh GenerateCylinderMesh(float[] waveformValues, float height)
-{
-    int segments = waveformValues.Length;  // Number of layers
-    List<Vector3> vertices = new List<Vector3>();
-    List<int> triangles = new List<int>();
-    List<Vector2> uvs = new List<Vector2>();
-    List<Vector2> heights = new List<Vector2>();
-
-    int circleResolution = 12;  // Number of points in the cross section
-    float angleIncrement = Mathf.PI * 2 / circleResolution;
-
-
-    // Generate vertices and UVs for each cross section
-    for (int i = 0; i < segments; i++)
     {
-        float radius = waveformValues[i];
-        // Invert the vertical order:
-        float y = ((segments - 1 - i) / (float)(segments - 1) - 0.1172f) * 76.8f * Globals.SCALE;
-        
-        // float normalizedHeight = (segments > 1) ? i / (float)(segments - 1) : 0f;
-        float normalizedHeight = (segments > 1) ? (segments - 1 - i) / (float)(segments - 1) : 0f;
+        int segments = waveformValues.Length;  // Number of layers
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> triangles = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
+        List<Vector2> heights = new List<Vector2>();
 
-        for (int j = 0; j < circleResolution; j++)
+        int circleResolution = 12;  // Number of points in the cross section
+        float angleIncrement = Mathf.PI * 2 / circleResolution;
+
+
+        // Generate vertices and UVs for each cross section
+        for (int i = 0; i < segments; i++)
         {
-            float angle = j * angleIncrement;
-            float x = radius * Mathf.Cos(angle);
-            float z = radius * Mathf.Sin(angle);
+            float radius = waveformValues[i];
+            // Invert the vertical order:
+            float y = ((segments - 1 - i) / (float)(segments - 1) - 0.1172f) * 76.8f * Globals.SCALE;
+            
+            // float normalizedHeight = (segments > 1) ? i / (float)(segments - 1) : 0f;
+            float normalizedHeight = (segments > 1) ? (segments - 1 - i) / (float)(segments - 1) : 0f;
 
-            vertices.Add(new Vector3(x, y, z));
-            uvs.Add(new Vector2(0, normalizedHeight));
-            heights.Add(new Vector2(76.8f, 0));
+            for (int j = 0; j < circleResolution; j++)
+            {
+                float angle = j * angleIncrement;
+                float x = radius * Mathf.Cos(angle);
+                float z = radius * Mathf.Sin(angle);
+
+                vertices.Add(new Vector3(x, y, z));
+                uvs.Add(new Vector2(0, normalizedHeight));
+                heights.Add(new Vector2(76.8f, 0));
+            }
         }
+
+        // Generate triangles between consecutive cross sections
+        for (int i = 0; i < segments - 1; i++)
+        {
+            int startIndex = i * circleResolution;
+            int nextIndex = (i + 1) * circleResolution;
+
+            for (int j = 0; j < circleResolution; j++)
+            {
+                int current = startIndex + j;
+                int next = startIndex + (j + 1) % circleResolution;
+                int top = nextIndex + j;
+                int topNext = nextIndex + (j + 1) % circleResolution;
+
+                triangles.Add(current);
+                triangles.Add(next);
+                triangles.Add(top);
+
+                triangles.Add(next);
+                triangles.Add(topNext);
+                triangles.Add(top);
+            }
+        }
+
+        // Create mesh
+        Mesh mesh = new Mesh
+        {
+            name = "WaveformCylinderMesh",
+            vertices = vertices.ToArray(),
+            triangles = triangles.ToArray(),
+            uv = uvs.ToArray(),
+            uv2 = heights.ToArray()
+        };
+        mesh.RecalculateNormals();
+
+        return mesh;
     }
 
-    // Generate triangles between consecutive cross sections
-    for (int i = 0; i < segments - 1; i++)
+    private void CreateTerrainMesh(Dictionary<Vector2Int, Vector3> points)
     {
-        int startIndex = i * circleResolution;
-        int nextIndex = (i + 1) * circleResolution;
-
-        for (int j = 0; j < circleResolution; j++)
+        if (points.Count == 0)
         {
-            int current = startIndex + j;
-            int next = startIndex + (j + 1) % circleResolution;
-            int top = nextIndex + j;
-            int topNext = nextIndex + (j + 1) % circleResolution;
-
-            triangles.Add(current);
-            triangles.Add(next);
-            triangles.Add(top);
-
-            triangles.Add(next);
-            triangles.Add(topNext);
-            triangles.Add(top);
+            Debug.LogWarning("No points to create terrain from!");
+            return;
         }
+
+        // find bounds
+        float minX = float.MaxValue, maxX = float.MinValue;
+        float minZ = float.MaxValue, maxZ = float.MinValue;
+        float minY = float.MaxValue, maxY = float.MinValue;
+
+        foreach (var point in points.Values)
+        {
+            minX = Mathf.Min(minX, point.x);
+            maxX = Mathf.Max(maxX, point.x);
+            minZ = Mathf.Min(minZ, point.z);
+            maxZ = Mathf.Max(maxZ, point.z);
+            minY = Mathf.Min(minY, point.y);
+            maxY = Mathf.Max(maxY, point.y);
+        }
+
+        // resolution of terrain
+        int resolution = 200;
+        float terrainWidth = maxX - minX;
+        float terrainLength = maxZ - minZ;
+        float cellSizeX = terrainWidth / (resolution - 1);
+        float cellSizeZ = terrainLength / (resolution - 1);
+
+        // mesh data arrays
+        Vector3[] vertices = new Vector3[resolution * resolution];
+        int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
+        Vector2[] uvs = new Vector2[vertices.Length];
+
+        // RBF interpolation
+        float influenceRadius = Mathf.Max(terrainWidth, terrainLength) / 10f; // control smoothness
+        float falloffFactor = 75f; // controls how quickly the influence falls off with distance
+
+        // generate vertices
+        for (int z = 0; z < resolution; z++)
+        {
+            for (int x = 0; x < resolution; x++)
+            {
+                float xPos = minX + x * cellSizeX;
+                float zPos = minZ + z * cellSizeZ;
+                int index = z * resolution + x;
+
+                // calc height using RBF interpolation
+                float height = CalculateRBFHeight(new Vector3(xPos, 0, zPos), points.Values.ToList(), 
+                                            influenceRadius, falloffFactor, minY);
+
+                vertices[index] = new Vector3(xPos, height, zPos);
+                uvs[index] = new Vector2(x / (float)(resolution - 1), z / (float)(resolution - 1));
+            }
+        }
+
+        // generate triangles
+        int tris = 0;
+        for (int z = 0; z < resolution - 1; z++)
+        {
+            for (int x = 0; x < resolution - 1; x++)
+            {
+                int vertexIndex = z * resolution + x;
+
+                triangles[tris] = vertexIndex;
+                triangles[tris + 1] = vertexIndex + resolution;
+                triangles[tris + 2] = vertexIndex + 1;
+                triangles[tris + 3] = vertexIndex + 1;
+                triangles[tris + 4] = vertexIndex + resolution;
+                triangles[tris + 5] = vertexIndex + resolution + 1;
+
+                tris += 6;
+            }
+        }
+
+        // create mesh
+        GameObject terrainObject = new GameObject("Terrain");
+        MeshFilter meshFilter = terrainObject.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = terrainObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = terrainMaterial;
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uvs;
+        mesh.RecalculateNormals();
+
+        meshFilter.mesh = mesh;
     }
 
-    // Create mesh
-    Mesh mesh = new Mesh
+    private float CalculateRBFHeight(Vector3 position, List<Vector3> points, 
+                                float influenceRadius, float falloffFactor, float defaultHeight)
     {
-        name = "WaveformCylinderMesh",
-        vertices = vertices.ToArray(),
-        triangles = triangles.ToArray(),
-        uv = uvs.ToArray(),
-        uv2 = heights.ToArray()
-    };
-    mesh.RecalculateNormals();
+        float totalWeight = 0f;
+        float weightedHeight = 0f;
+        float maxInfluenceDistance = influenceRadius * 2f;
 
-    return mesh;
-}
+        foreach (Vector3 point in points)
+        {
+            float distance = Vector2.Distance(
+                new Vector2(position.x, position.z),
+                new Vector2(point.x, point.z)
+            );
 
-    // private Mesh GenerateCylinderMesh(float[] waveformValues, float height)
-    // {
-    //     int segments = waveformValues.Length;  // num layers
-    //     List<Vector3> vertices = new List<Vector3>();
-    //     List<int> triangles = new List<int>();
-    //     List<Vector2> uvs = new List<Vector2>();
-    //     List<Vector2> heights = new List<Vector2>();
+            if (distance < maxInfluenceDistance)
+            {
+                // calculate weight using fall off function
+                float weight = Mathf.Exp(-falloffFactor * (distance * distance) / 
+                                    (influenceRadius * influenceRadius));
 
-    //     int circleResolution = 12;  // num points in cross section
-    //     float angleIncrement = Mathf.PI * 2 / circleResolution;
+                weightedHeight += point.y * weight;
+                totalWeight += weight;
+            }
+        }
 
-    //     // generate vertices and UVs for each cross section
-    //     for (int i = 0; i < segments; i++)
-    //     {
-    //         float radius = waveformValues[i];
-    //         float y = (i / (float)(segments - 1)) * height;
-
-    //         // normalized height [0, 1]
-    //         float normalizedHeight = i / (float)(segments - 1);
-
-    //         // create vertices in a circular pattern
-    //         for (int j = 0; j < circleResolution; j++)
-    //         {
-    //             float angle = j * angleIncrement;
-    //             float x = radius * Mathf.Cos(angle);
-    //             float z = radius * Mathf.Sin(angle);
-    //             vertices.Add(new Vector3(x, y, z));
-
-    //             // assign UVs with normalized height
-    //             uvs.Add(new Vector2(0, normalizedHeight));
-
-    //             // assign heights
-    //             heights.Add(new Vector2(height, 0));
-    //         }
-    //     }
-
-    //     // generate triangles between consecutive cross sections
-    //     for (int i = 0; i < segments - 1; i++)
-    //     {
-    //         int startIndex = i * circleResolution;
-    //         int nextIndex = (i + 1) * circleResolution;
-
-    //         for (int j = 0; j < circleResolution; j++)
-    //         {
-    //             int current = startIndex + j;
-    //             int next = startIndex + (j + 1) % circleResolution;
-    //             int top = nextIndex + j;
-    //             int topNext = nextIndex + (j + 1) % circleResolution;
-
-    //             triangles.Add(current);
-    //             triangles.Add(top);
-    //             triangles.Add(next);
-
-    //             triangles.Add(next);
-    //             triangles.Add(top);
-    //             triangles.Add(topNext);
-    //         }
-    //     }
-
-    //     // create mesh
-    //     Mesh mesh = new Mesh();
-    //     mesh.name = "WaveformCylinderMesh";
-    //     mesh.vertices = vertices.ToArray();
-    //     mesh.triangles = triangles.ToArray();
-    //     mesh.uv = uvs.ToArray();
-    //     mesh.uv2 = heights.ToArray();
-    //     mesh.RecalculateNormals();
-
-    //     return mesh;
-    // }
+        return totalWeight > 0 ? weightedHeight / totalWeight : defaultHeight;
+    }
 }
