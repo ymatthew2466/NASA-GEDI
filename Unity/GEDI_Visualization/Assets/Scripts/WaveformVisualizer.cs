@@ -534,7 +534,7 @@ public class WaveformVisualizer : MonoBehaviour
         MeshRenderer meshRenderer = terrainObject.AddComponent<MeshRenderer>();
         meshRenderer.material = terrainMaterial;
 
-        Mesh mesh = new Mesh()
+        Mesh mesh = new Mesh();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = uvs;
