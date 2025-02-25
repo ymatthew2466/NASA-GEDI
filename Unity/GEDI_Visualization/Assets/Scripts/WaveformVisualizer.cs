@@ -584,6 +584,7 @@ public class WaveformVisualizer : MonoBehaviour
 
         // mesh
         Mesh mesh = new Mesh();
+        Mesh mesh = new Mesh();
         mesh.vertices = vertices;
         mesh.SetIndices(lines.ToArray(), MeshTopology.Lines, 0);
         mesh.uv = uvs;
