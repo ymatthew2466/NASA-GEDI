@@ -1,100 +1,87 @@
-import pickle
-import pandas as pd
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+# import pickle
+# import pandas as pd
+# import numpy as np
+# import sys
+# import warnings
+# warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-with open('./GEDI_sample_for_CS237_2024.pkl', 'rb') as f:
-    data = pickle.load(f)
+# def adaptive_downsample(waveform, similarity_threshold=1, min_segment_length=3):
+#     # returns tuple of (downsampled_values, segment_lengths)
+#     downsampled = []
+#     segment_lengths = []
+    
+#     i = 0
+#     while i < len(waveform):
+#         current_value = waveform[i]
+#         segment_length = 1
+        
+#         j = i + 1
+#         while j < len(waveform):
+#             if abs(waveform[j] - current_value) <= similarity_threshold:
+#                 segment_length += 1
+#                 j += 1
+#             else:
+#                 break
+        
+#         if segment_length >= min_segment_length:
+#             segment_mean = np.mean(waveform[i:i+segment_length])
+#             downsampled.append(segment_mean)
+#             segment_lengths.append(segment_length)
+#             i += segment_length
+#         else:
+#             downsampled.append(current_value)
+#             segment_lengths.append(1)
+#             i += 1
+            
+#     return np.array(downsampled), np.array(segment_lengths)
 
-downsample_factor = 20
-waveform_downsample_factor = 1
+# with open('./pkls/Pantanal_cs237_2024_ISS.pkl', 'rb') as f:
+#     data = pickle.load(f)
 
-
-def area_filter(lng, lat):
-    # return (lng>-60.45) & (lng<-60.25) & (lat>2.25) & (lat<2.45)
-    # return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
-    return (lng>-82.7) & (lng<-82.6) & (lat>51.7) & (lat<51.8)
-
-data_list = []
-for i in range(len(data['prop'])):
-
-    entry = data['prop'][i]
-
-    # extracting values
-    latitude = entry['geolocation/latitude_bin0']
-    longitude = entry['geolocation/longitude_bin0']
-    elevation = entry['geolocation/elevation_bin0']
-
-    if not area_filter(longitude, latitude):
-        continue
-
-    # rh metrics
-    rh_2 = data['rh'][i][2]
-    rh_50 = data['rh'][i][50]
-    rh_98 = data['rh'][i][98]
-    rh_waveform = data['rh'][i]
-    rh_waveform = rh_waveform/rh_waveform.sum()*30
-    rh_waveform_str = ','.join(map(str, rh_waveform))
-
-    # raw waveform
-    raw_waveform = data['y'][i]
-    raw_waveform_downsampled = raw_waveform[::waveform_downsample_factor]
-    raw_waveform_str = ','.join(map(str, raw_waveform_downsampled))
-
-    # append data
-    data_list.append({
-        'latitude': latitude,
-        'longitude': longitude,
-        'elevation': elevation,
-        'rh2': rh_2,
-        'rh50': rh_50,
-        'rh98': rh_98,
-        'rh_waveform': rh_waveform_str,
-        'raw_waveform': raw_waveform_str,
-    })
-    print('iter: ', i)
+# # print(data['prop_rh'][0])
+# # print(data['prop'][0])
+# # print(data['rh'][0])
+# # print(data['y'][0])
+# # sys.exit()
 
 
-df = pd.DataFrame(data_list)
-df.to_csv('forest.csv', index=False)
 
-# if isinstance(data, list):
-#     print(f"The file contains a list with {len(data)} elements.")
-#     if len(data) > 0:
-#         print((data[0][0]))
-#         print(len(data[0][100]))
-
+# def area_filter(lng, lat):
+#      # return (lng>-60.45) & (lng<-60.25) & (lat>2.25) & (lat<2.45)
+#     return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
+# #     return (lng>-82.7) & (lng<-82.6) & (lat>51.7) & (lat<51.8)
+#     # return (lng>-82.7) & (lng<-82.6) & (lat>51.7) & (lat<51.8)
 
 # data_list = []
-# for i in range(len(data[1])):
-#     # continue
-
-#     if i % downsample_factor != 0:
-#         continue
-
-#     # entry = data['prop'][i]
-#     entry = data[1][i]  # dict
-
-
-#     # extracting values
+# for i in range(len(data['prop'])):
+#     entry = data['prop'][i]
+    
 #     latitude = entry['geolocation/latitude_bin0']
 #     longitude = entry['geolocation/longitude_bin0']
 #     elevation = entry['geolocation/elevation_bin0']
 
-#     # rh metrics
-#     rh_2 = f"{float(entry['elev_highestreturn']) - float(entry['elev_lowestmode'])}"
-#     rh_50 = f"{float(entry['elev_highestreturn']) - float(entry['elev_lowestmode'])}"
-#     rh_98 = f"{float(entry['elev_highestreturn']) - float(entry['elev_lowestmode'])}"
+#     if not area_filter(longitude, latitude):
+#         continue
 
-#     rh_waveform = data[0][i]
+#     # temp naive downsampling
+#     # if i % 50 != 0:
+#     #     continue
+
+#     rh_2 = data['rh'][i][2]
+#     rh_50 = data['rh'][i][50]
+#     rh_98 = data['rh'][i][98]
+#     rh_waveform = data['rh'][i]
+#     rh_waveform = rh_waveform/rh_waveform.sum()*30
 #     rh_waveform_str = ','.join(map(str, rh_waveform))
 
-#     # raw waveform
-#     raw_waveform = data[0][i]
-#     raw_waveform_downsampled = raw_waveform[::waveform_downsample_factor]
-#     raw_waveform_str = ','.join(map(str, raw_waveform_downsampled))
+#     # Adaptive downsampling of raw waveform
+#     raw_waveform = data['y'][i]
+#     downsampled_values, segment_lengths = adaptive_downsample(raw_waveform)
+    
+#     # Convert to strings and combine with delimiter
+#     values_str = ','.join(map(str, downsampled_values))
+#     lengths_str = ','.join(map(str, segment_lengths))
 
-#     # append data
 #     data_list.append({
 #         'latitude': latitude,
 #         'longitude': longitude,
@@ -103,12 +90,238 @@ df.to_csv('forest.csv', index=False)
 #         'rh50': rh_50,
 #         'rh98': rh_98,
 #         'rh_waveform': rh_waveform_str,
-#         'raw_waveform': raw_waveform_str,
+#         'raw_waveform_values': values_str,
+#         'raw_waveform_lengths': lengths_str,
 #     })
 #     print('iter: ', i)
 
+# df = pd.DataFrame(data_list)
+# df.to_csv('rainforest_adaptive_sim5.csv', index=False)
+
+
+
+# # WITH RH CUTOFF
+# import pickle
+# import pandas as pd
+# import numpy as np
+# import sys
+# import warnings
+# warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# def adaptive_downsample(waveform, similarity_threshold=0.5, min_segment_length=3):
+#     """
+#     Returns: tuple of (downsampled_values, segment_lengths)
+#     """
+#     downsampled = []
+#     segment_lengths = []
+    
+#     i = 0
+#     while i < len(waveform):
+#         current_value = waveform[i]
+#         segment_length = 1
+        
+#         j = i + 1
+#         while j < len(waveform):
+#             if abs(waveform[j] - current_value) <= similarity_threshold:
+#                 segment_length += 1
+#                 j += 1
+#             else:
+#                 break
+        
+#         if segment_length >= min_segment_length:
+#             segment_mean = np.mean(waveform[i:i+segment_length])
+#             downsampled.append(segment_mean)
+#             segment_lengths.append(segment_length)
+#             i += segment_length
+#         else:
+#             downsampled.append(current_value)
+#             segment_lengths.append(1)
+#             i += 1
+            
+#     return np.array(downsampled), np.array(segment_lengths)
+
+# with open('./pkls/Pantanal_cs237_2024_ISS.pkl', 'rb') as f:
+#     data = pickle.load(f)
+
+# def area_filter(lng, lat):
+#     return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
+
+# data_list = []
+# for i in range(len(data['prop'])):
+#     entry = data['prop'][i]
+    
+#     latitude = entry['geolocation/latitude_bin0']
+#     longitude = entry['geolocation/longitude_bin0']
+#     elevation = entry['geolocation/elevation_bin0']
+
+#     if not area_filter(longitude, latitude):
+#         continue
+
+#     rh_2 = data['rh'][i][2]
+#     rh_50 = data['rh'][i][50]
+#     rh_98 = data['rh'][i][98]
+    
+#     # Get heights and waveform
+#     heights = data['rh'][i]
+#     waveform = data['y'][i]
+    
+#     # Calculate proportion of waveform to keep based on RH98
+#     # Find max height index and value right at or after RH98
+#     # rh98_value = entry['rh_98']
+#     rh_cutoff = data['rh'][i][90]
+#     rh98_idx = None
+#     for idx, h in enumerate(heights):
+#         if h >= rh_cutoff:
+#             rh98_idx = idx
+#             break
+    
+#     if rh98_idx is None:
+#         rh98_idx = len(heights) - 1  # Use the last index if RH98 exceeds all heights
+    
+#     # Calculate the proportion of the height range that RH98 represents
+#     height_range_proportion = rh98_idx / (len(heights) - 1)
+    
+#     # Apply this proportion to the waveform length to find where to cut
+#     waveform_cutoff_index = int(height_range_proportion * (len(waveform) - 1))
+    
+#     # Ensure we have at least one value
+#     waveform_cutoff_index = max(1, waveform_cutoff_index)
+    
+#     # Trim the waveform
+#     trimmed_waveform = waveform[:waveform_cutoff_index + 1]
+    
+#     # Process the RH waveform 
+#     rh_waveform = heights.copy()
+#     rh_waveform = rh_waveform/rh_waveform.sum()*30 if rh_waveform.sum() > 0 else rh_waveform
+#     rh_waveform_str = ','.join(map(str, rh_waveform))
+
+#     # Adaptive downsampling of trimmed waveform
+#     downsampled_values, segment_lengths = adaptive_downsample(trimmed_waveform)
+    
+#     # Convert to strings and combine with delimiter
+#     values_str = ','.join(map(str, downsampled_values))
+#     lengths_str = ','.join(map(str, segment_lengths))
+
+#     data_list.append({
+#         'latitude': latitude,
+#         'longitude': longitude,
+#         'elevation': elevation,
+#         'rh2': rh_2,
+#         'rh50': rh_50,
+#         'rh98': rh_98,
+#         'rh_waveform': rh_waveform_str,
+#         'raw_waveform_values': values_str,
+#         'raw_waveform_lengths': lengths_str,
+#     })
+#     # print('iter: ', i)
 
 # df = pd.DataFrame(data_list)
-# df.to_csv('rainforest.csv', index=False)
+# df.to_csv('rainforest_adaptive_sim05_trimmed.csv', index=False)
 
 
+
+# WITH INSTRUMENT COORDS
+import pickle
+import pandas as pd
+import numpy as np
+import sys
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+def adaptive_downsample(waveform, similarity_threshold=1, min_segment_length=3):
+    # returns tuple of (downsampled_values, segment_lengths)
+    downsampled = []
+    segment_lengths = []
+    
+    i = 0
+    while i < len(waveform):
+        current_value = waveform[i]
+        segment_length = 1
+        
+        j = i + 1
+        while j < len(waveform):
+            if abs(waveform[j] - current_value) <= similarity_threshold:
+                segment_length += 1
+                j += 1
+            else:
+                break
+        
+        if segment_length >= min_segment_length:
+            segment_mean = np.mean(waveform[i:i+segment_length])
+            downsampled.append(segment_mean)
+            segment_lengths.append(segment_length)
+            i += segment_length
+        else:
+            downsampled.append(current_value)
+            segment_lengths.append(1)
+            i += 1
+            
+    return np.array(downsampled), np.array(segment_lengths)
+
+with open('./pkls/Pantanal_cs237_2024_ISS.pkl', 'rb') as f:
+    data = pickle.load(f)
+
+def area_filter(lng, lat):
+    return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
+
+data_list = []
+for i in range(len(data['prop'])):
+    entry = data['prop'][i]
+    prop_rh = data['prop_rh'][i]
+    
+    latitude = entry['geolocation/latitude_bin0']
+    longitude = entry['geolocation/longitude_bin0']
+    elevation = entry['geolocation/elevation_bin0']
+
+    if not area_filter(longitude, latitude):
+        continue
+
+    # Get instrument and lowestmode coordinates
+    instrument_lat = prop_rh['geolocation/latitude_instrument']
+    instrument_lon = prop_rh['geolocation/longitude_instrument']
+    instrument_alt = prop_rh['geolocation/altitude_instrument']
+    
+    lowest_lat = prop_rh['lat_lowestmode']
+    lowest_lon = prop_rh['lon_lowestmode']
+    lowest_elev = prop_rh['elev_lowestmode']
+
+    # Get WGS84 elevation from digital elevation model
+    wgs84_elevation = prop_rh['geolocation/digital_elevation_model']
+
+    rh_2 = data['rh'][i][2]
+    rh_50 = data['rh'][i][50]
+    rh_98 = data['rh'][i][98]
+    rh_waveform = data['rh'][i]
+    rh_waveform = rh_waveform/rh_waveform.sum()*30 if rh_waveform.sum() > 0 else rh_waveform
+    rh_waveform_str = ','.join(map(str, rh_waveform))
+
+    # Adaptive downsampling of raw waveform
+    raw_waveform = data['y'][i]
+    downsampled_values, segment_lengths = adaptive_downsample(raw_waveform)
+    
+    # Convert to strings and combine with delimiter
+    values_str = ','.join(map(str, downsampled_values))
+    lengths_str = ','.join(map(str, segment_lengths))
+
+    data_list.append({
+        'latitude': latitude,
+        'longitude': longitude,
+        'elevation': elevation,
+        'instrument_lat': instrument_lat,
+        'instrument_lon': instrument_lon, 
+        'instrument_alt': instrument_alt,
+        'lowest_lat': lowest_lat,
+        'lowest_lon': lowest_lon,
+        'lowest_elev': lowest_elev,
+        'wgs84_elevation': wgs84_elevation,
+        'rh2': rh_2,
+        'rh50': rh_50,
+        'rh98': rh_98,
+        'rh_waveform': rh_waveform_str,
+        'raw_waveform_values': values_str,
+        'raw_waveform_lengths': lengths_str,
+    })
+    print('iter: ', i)
+
+df = pd.DataFrame(data_list)
+df.to_csv('rainforest_adaptive_slanted.csv', index=False)

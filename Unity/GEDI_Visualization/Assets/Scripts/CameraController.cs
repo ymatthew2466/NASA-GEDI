@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     private Vector3 cameraOffset;        // Camera offset from the target point
     private Vector3 lastMousePosition;   // Last mouse position for detecting movement
-    private bool isRotating = false;     // To check if the right mouse button is held down
+    // private bool isRotating = false;     // To check if the right mouse button is held down
 
     void Start()
     {

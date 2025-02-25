@@ -168,11 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   csvParser: {fileID: 1389572230}
   waveformMaterial: {fileID: 2100000, guid: d453bc3c660744436b3f06ccbc560685, type: 2}
-  terrainMaterial: {fileID: 2100000, guid: 0b170764429d7486d9f0b052f33e86b7, type: 2}
+  terrainMaterial: {fileID: 2100000, guid: c03e0afd6f4044807967aecfecb67789, type: 2}
   positionScale: 0.8
   elevationScale: 0.00001
   cylinderSum: 40
-  gridCellSize: 2.44
+  gridCellSize: 9.76
   selectedRHField: 2
   visualizePopulated: 1
   waveformHeightThreshold: -5
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaf0b2df0d2f4ce3a6b76688fbc4d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: Assets/Data/rainforest.csv
+  filePath: Assets/Data/rainforest_adaptive_slanted.csv
 --- !u!4 &1389572231
 Transform:
   m_ObjectHideFlags: 0

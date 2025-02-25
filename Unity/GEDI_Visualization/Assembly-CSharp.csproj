@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Shaders and Shapes/WaveformShader.shader" />
+    <None Include="Assets/Shaders and Shapes/Wireframe.shader" />
     <None Include="Assets/Shaders and Shapes/StripedHueNoiseShader.shader" />
     <None Include="Assets/Shaders and Shapes/GroundShader.shader" />
     <None Include="Assets/Scripts/WaveformVisualizer_checkpoint.txt" />

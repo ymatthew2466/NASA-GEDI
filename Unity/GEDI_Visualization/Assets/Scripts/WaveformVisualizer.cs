@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public enum RHValue
 {
@@ -13,7 +14,6 @@ public static class Globals
     public const float SCALE = 0.02f;
 }
 
-
 public class WaveformVisualizer : MonoBehaviour
 {
     [Header("Data and Material")]
@@ -25,7 +25,6 @@ public class WaveformVisualizer : MonoBehaviour
     public float positionScale = 0.0001f;  // Scale factor for position (Unity units per meter)
     public float elevationScale = 0.0001f; // Scale factor for elevation
     public float cylinderSum = 25.0f;  // target sum for waveform normalization
-
 
     [Header("Grid Configuration")]
     [Range(0.000001f, 10f)]
@@ -54,13 +53,12 @@ public class WaveformVisualizer : MonoBehaviour
         {
             if (csvParser.getDataPoints() == null || csvParser.getDataPoints().Count == 0)
             {
-                csvParser.loadCSV();  // Load CSV if data is null
+                csvParser.loadCSV();
             }
 
             List<CSVParser.GEDIDataPoint> dataPoints = csvParser.getDataPoints();
             if (dataPoints != null && dataPoints.Count > 0)
             {
-                // init reference point
                 referenceLatitude = dataPoints[0].latitude;
                 referenceLongitude = dataPoints[0].longitude;
                 referenceElevation = dataPoints[0].elevation;
@@ -95,14 +93,11 @@ public class WaveformVisualizer : MonoBehaviour
 
     private Vector3 LatLong2Unity(float latitude, float longitude, float elevation)
     {
-        // delta from reference point
         float latDiff = latitude - referenceLatitude;
         float lonDiff = longitude - referenceLongitude;
         float elevDiff = elevation - referenceElevation;
 
-        // convert lat delta into meters
-        float latInMeters = latDiff * 111000f; // approx meters per degree latitude
-        // convert long delta to meters, and account for Earth curvature
+        float latInMeters = latDiff * 111000f;
         float cosLat = Mathf.Cos(referenceLatitude * Mathf.Deg2Rad);
         float lonInMeters = lonDiff * 111000f * cosLat;
 
@@ -110,167 +105,87 @@ public class WaveformVisualizer : MonoBehaviour
         float y = elevDiff * elevationScale * Globals.SCALE;
         float z = latInMeters * positionScale * Globals.SCALE;
 
-        // return new Vector3(x, y, z);
         return new Vector3(x, elevation*0.01f, z);
+        // return new Vector3(x, elevation, z);
     }
+
+    // New helper method to calculate direction from ground to ISS
+    // private Vector3 CalculateISSDirection(CSVParser.GEDIDataPoint dataPoint)
+    // {
+    //     // Calculate raw direction vector in geographic coordinates
+    //     float latDiff = dataPoint.instrumentLat - dataPoint.lowestLat;
+    //     float lonDiff = dataPoint.instrumentLon - dataPoint.lowestLon;
+    //     float elevDiff = dataPoint.instrumentAlt - (dataPoint.lowestElev + dataPoint.wgs84Elevation);
+
+    //     // Convert to meters
+    //     float latInMeters = latDiff * 111000f;
+    //     float cosLat = Mathf.Cos(dataPoint.lowestLat * Mathf.Deg2Rad);
+    //     float lonInMeters = lonDiff * 111000f * cosLat;
+
+    //     // Create normalized direction vector
+    //     Vector3 direction = new Vector3(lonInMeters, elevDiff, latInMeters).normalized;
+        
+    //     // Project direction into Unity's coordinate system orientation
+    //     // Note: we're only using this for direction, not for absolute positioning
+    //     return new Vector3(direction.x, direction.y * 0.01f, direction.z);
+    // }
+
+    private Vector3 CalculateISSDirection(CSVParser.GEDIDataPoint dataPoint)
+    {   
+        // testing purposes only
+        float slantAmplification = 20f;
+
+
+        // raw direction vector in geographic coordinates
+        float latDiff = dataPoint.instrumentLat - dataPoint.lowestLat;
+        float lonDiff = dataPoint.instrumentLon - dataPoint.lowestLon;
+        float elevDiff = dataPoint.instrumentAlt - (dataPoint.lowestElev + dataPoint.wgs84Elevation);
+
+        // conv to meters
+        float latInMeters = latDiff * 111000f;
+        float cosLat = Mathf.Cos(dataPoint.lowestLat * Mathf.Deg2Rad);
+        float lonInMeters = lonDiff * 111000f * cosLat;
+        Vector3 rawDirection = new Vector3(lonInMeters, elevDiff, latInMeters);
+        
+        // extract horizontal and vertical
+        float horizontalMagnitude = Mathf.Sqrt(rawDirection.x * rawDirection.x + rawDirection.z * rawDirection.z);
+        float verticalComponent = rawDirection.y;
+        
+        // exaggerate horizontal by testing slant amp for testing
+        float amplifiedHorizontal = horizontalMagnitude * slantAmplification;
+        float directionRatio = amplifiedHorizontal / horizontalMagnitude;
+        Vector3 amplifiedDirection = new Vector3(
+            rawDirection.x * directionRatio,
+            verticalComponent,
+            rawDirection.z * directionRatio
+        ).normalized;
+        
+        // elevation * 0.01, but not sure if correct
+        return new Vector3(amplifiedDirection.x, amplifiedDirection.y * 0.01f, amplifiedDirection.z);
+    }
+
 
     private bool IsHeightValid(float height)
     {
         return height >= waveformHeightThreshold;
     }
 
-    public void VisualizeData(List<CSVParser.GEDIDataPoint> dataPoints)
+    private void CreateCylinder(Vector3 position, CSVParser.GEDIDataPoint dataPoint, float height)
     {
-        gridPositions.Clear();
-
-        // dict to hold grid cells
-        Dictionary<Vector2Int, List<CSVParser.GEDIDataPoint>> grid = new Dictionary<Vector2Int, List<CSVParser.GEDIDataPoint>>();
-
-        foreach (var point in dataPoints)
+        // Check if any values are above threshold
+        bool hasSignificantValues = false;
+        for (int i = 0; i < dataPoint.rawWaveformValues.Length; i++)
         {
-            // calculate grid indices
-            int xIndex = Mathf.FloorToInt((point.longitude - referenceLongitude) / gridCellSize);
-            int yIndex = Mathf.FloorToInt((point.latitude - referenceLatitude) / gridCellSize);
-            Vector2Int gridIndex = new Vector2Int(xIndex, yIndex);
-
-            if (!grid.ContainsKey(gridIndex))
+            if (dataPoint.rawWaveformValues[i] >= waveformEnergyThreshold)
             {
-                grid[gridIndex] = new List<CSVParser.GEDIDataPoint>();
-            }
-            grid[gridIndex].Add(point);
-
-            // // Convert latitude to string for substring comparison
-            // string targetLatitude = "1.6798";
-            // if (!point.latitude.ToString().Contains(targetLatitude))
-            // {
-            //     continue;
-            // }
-            // Vector3 position = LatLong2Unity(point.latitude, point.longitude, point.elevation);
-            // float selectedRH = GetSelectedRHValue(point);
-            // CreateCylinder(position, point.rawWaveform, selectedRH);
-        }
-        
-        Debug.Log($"Total Grid Cells: {grid.Count}");
-
-        if (visualizePopulated)
-        {
-            if (grid.Count == 0)
-            {
-                Debug.LogWarning("No grid cells to process.");
-                return;
-            }
-
-            // most populated grid cell
-            var mostPopulatedCell = grid.OrderByDescending(cell => cell.Value.Count).First();
-            Vector2Int targetGridIndex = mostPopulatedCell.Key;
-            List<CSVParser.GEDIDataPoint> targetCellPoints = mostPopulatedCell.Value;
-            string lats = "";
-
-            Debug.Log($"Most Populated Grid Cell: {targetGridIndex} with {targetCellPoints.Count} points.");
-
-            // all waveforms in the most populated cell
-            foreach (var point in targetCellPoints)
-            {
-                float selectedRH = GetSelectedRHValue(point);
-
-                // validate height before visualization
-                if (!IsHeightValid(selectedRH))
-                {
-                    Debug.Log($"Skipping waveform at ({point.latitude}, {point.longitude}) with height {selectedRH}m below threshold.");
-                    continue;
-                }
-                Vector3 position = LatLong2Unity(point.latitude, point.longitude, point.elevation);
-                lats = lats + ", " + point.latitude;
-
-                CreateCylinder(position, point.rawWaveform, selectedRH);
-                // Debug.Log($"Waveform at ({point.latitude}, {point.longitude})");
-
-            }
-            lats = lats.Substring(2);
-            // Debug.Log(lats);
-        }
-        else
-        {
-            // visualize one random waveform per grid cell
-            foreach (var cell in grid)
-            {
-                Vector2Int gridIndex = cell.Key;
-                List<CSVParser.GEDIDataPoint> cellPoints = cell.Value;
-
-                if (cellPoints == null || cellPoints.Count == 0)
-                    continue;
-
-                // one random waveform from the cell
-                CSVParser.GEDIDataPoint selectedPoint = cellPoints[Random.Range(0, cellPoints.Count)];
-
-                float selectedRH = GetSelectedRHValue(selectedPoint);
-
-                // skip waveforms that don't meet the threshold
-                if (!IsHeightValid(selectedRH))
-                {
-                    Debug.Log($"Skipping waveform at ({selectedPoint.latitude}, {selectedPoint.longitude}) with height {selectedRH}m below threshold.");
-                    continue; 
-                }
-
-                Vector3 position = LatLong2Unity(selectedPoint.latitude, selectedPoint.longitude, selectedPoint.elevation);
-
-                CreateCylinder(position, selectedPoint.rawWaveform, selectedRH);
-            }
-        }
-        CreateTerrainMesh(terrainPoints);
-        Debug.Log($"lat: {referenceLatitude}, long: {referenceLongitude}");
-    }
-
-    // private void CreateCylinder(Vector3 position, string rawWaveform, float height)
-    // {
-    //     // parse waveform data
-    //     float[] waveformValues = ParseWaveform(rawWaveform);
-
-    //     GameObject waveformObject = new GameObject("WaveformCylinder");
-    //     waveformObject.transform.position = position;
-
-    //     MeshFilter meshFilter = waveformObject.AddComponent<MeshFilter>();
-    //     MeshRenderer meshRenderer = waveformObject.AddComponent<MeshRenderer>();
-    //     meshRenderer.material = waveformMaterial;
-
-    //     Mesh mesh = GenerateCylinderMesh(waveformValues, height);
-    //     meshFilter.mesh = mesh;
-    // }
-
-    private void CreateCylinder(Vector3 position, string rawWaveform, float height)
-    {
-        float[] waveformValues = ParseRawWaveform(rawWaveform);
-
-        // first index where amplitude is above the threshold
-        int startIndex = 0;
-        bool foundSignificantValue = false;
-        for (int i = 0; i < waveformValues.Length; i++)
-        {
-            if (waveformValues[i] >= waveformEnergyThreshold)
-            {
-                startIndex = i;
-                foundSignificantValue = true;
+                hasSignificantValues = true;
                 break;
             }
         }
 
-        if (!foundSignificantValue)
+        if (!hasSignificantValues)
         {
             Debug.Log("No portion of the waveform found above threshold. Skipping.");
-            return;
-        }
-
-        // truncate the waveform to start from the significant portion
-        float[] truncatedWaveform = new float[waveformValues.Length - startIndex];
-        System.Array.Copy(waveformValues, startIndex, truncatedWaveform, 0, truncatedWaveform.Length);
-
-        // normalize the truncated waveform
-        NormalizeWaveform(truncatedWaveform, cylinderSum);
-
-        // truncated waveform is too short, skip
-        if (truncatedWaveform.Length < 2)
-        {
-            Debug.Log("Truncated waveform is too short. Skipping.");
             return;
         }
 
@@ -281,34 +196,24 @@ public class WaveformVisualizer : MonoBehaviour
         MeshRenderer meshRenderer = waveformObject.AddComponent<MeshRenderer>();
         meshRenderer.material = waveformMaterial;
 
-        Mesh mesh = GenerateCylinderMesh(truncatedWaveform, height);
+        // Normalize the waveform values
+        float[] normalizedValues = new float[dataPoint.rawWaveformValues.Length];
+        Array.Copy(dataPoint.rawWaveformValues, normalizedValues, dataPoint.rawWaveformValues.Length);
+        NormalizeWaveform(normalizedValues, cylinderSum);
+
+        // calc direction from ground to ISS
+        Vector3 slantDirection = CalculateISSDirection(dataPoint);
+        
+        // cylinder mesh with slant
+        Mesh mesh = GenerateCylinderMesh(normalizedValues, dataPoint.rawWaveformLengths, height, slantDirection);
         meshFilter.mesh = mesh;
 
-        // Add point to terrain points using more precise grid key
         Vector2Int gridKey = new Vector2Int(
             Mathf.RoundToInt(position.x * 1000),
             Mathf.RoundToInt(position.z * 1000)
         );
         
-        // Store the ground position (not the top of the waveform)
         terrainPoints[gridKey] = position;
-    }
-
-    private float[] ParseRawWaveform(string waveform)
-    {
-        string[] values = waveform.Split(',');
-        float[] waveformValues = new float[values.Length];
-
-        for (int i = 0; i < values.Length; i++)
-        {
-            if (!float.TryParse(values[i], out waveformValues[i]))
-            {
-                Debug.LogWarning($"Unable to parse value: {values[i]}");
-                waveformValues[i] = 0f;
-            }
-        }
-
-        return waveformValues;
     }
 
     private void NormalizeWaveform(float[] waveformValues, float targetSum)
@@ -329,7 +234,6 @@ public class WaveformVisualizer : MonoBehaviour
         }
         else
         {
-            // If sum is zero, distribute evenly
             float equalValue = targetSum / waveformValues.Length;
             for (int i = 0; i < waveformValues.Length; i++)
             {
@@ -338,107 +242,88 @@ public class WaveformVisualizer : MonoBehaviour
         }
     }
 
-
-    private float[] ParseWaveform(string waveform)
+    private Mesh GenerateCylinderMesh(float[] waveformValues, int[] segmentLengths, float height, Vector3 slantDirection)
     {
-        string[] values = waveform.Split(',');
-        float[] waveformValues = new float[values.Length];
-        float sumValue = 0f;
-
-        // sum of waveform
-        for (int i = 0; i < values.Length; i++)
-        {
-            if (float.TryParse(values[i], out float parsedValue))
-            {
-                waveformValues[i] = parsedValue;
-                sumValue += waveformValues[i];
-            }
-            else
-            {
-                Debug.LogWarning($"Unable to parse value: {values[i]}");
-                waveformValues[i] = 0f;
-            }
-        }
-
-        // normalize
-        if (sumValue > 0)
-        {
-            float scaleFactor = cylinderSum / sumValue;
-            for (int i = 0; i < waveformValues.Length; i++)
-            {
-                waveformValues[i] *= scaleFactor;
-            }
-        }
-        else
-        {
-            // sum is zero, set all values to an equal fraction
-            float equalValue = cylinderSum / waveformValues.Length;
-            for (int i = 0; i < waveformValues.Length; i++)
-            {
-                waveformValues[i] = equalValue;
-            }
-        }
-
-        return waveformValues;
-    }
-    private Mesh GenerateCylinderMesh(float[] waveformValues, float height)
-    {
-        int segments = waveformValues.Length;  // Number of layers
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
         List<Vector2> uvs = new List<Vector2>();
         List<Vector2> heights = new List<Vector2>();
 
-        int circleResolution = 12;  // Number of points in the cross section
+        int circleResolution = 12;
         float angleIncrement = Mathf.PI * 2 / circleResolution;
 
-
-        // Generate vertices and UVs for each cross section
-        for (int i = 0; i < segments; i++)
+        // calc total height
+        float totalHeight = 76.8f * Globals.SCALE;
+        float heightPerSegment = totalHeight / waveformValues.Length;
+        
+        // vertices for each layer
+        for (int i = 0; i <= waveformValues.Length; i++)
         {
-            float radius = waveformValues[i];
-            // Invert the vertical order:
-            float y = ((segments - 1 - i) / (float)(segments - 1) - 0.1172f) * 76.8f * Globals.SCALE;
+            float normalizedHeight = i / (float)waveformValues.Length;
+            float y = (1.0f - normalizedHeight - 0.1172f) * totalHeight;
             
-            // float normalizedHeight = (segments > 1) ? i / (float)(segments - 1) : 0f;
-            float normalizedHeight = (segments > 1) ? (segments - 1 - i) / (float)(segments - 1) : 0f;
+            // calculate slant offset - the offset increases with height
+            Vector3 slantOffset = slantDirection * y;
+            
+            // use last value for top cap for radius
+            float radius = i < waveformValues.Length ? 
+                waveformValues[i] : 
+                waveformValues[waveformValues.Length - 1];
 
+            // vertices for the circle
             for (int j = 0; j < circleResolution; j++)
             {
                 float angle = j * angleIncrement;
                 float x = radius * Mathf.Cos(angle);
                 float z = radius * Mathf.Sin(angle);
 
-                vertices.Add(new Vector3(x, y, z));
-                uvs.Add(new Vector2(0, normalizedHeight));
-                heights.Add(new Vector2(76.8f, 0));
+                // apply slant offset
+                vertices.Add(new Vector3(x + slantOffset.x, y, z + slantOffset.z));
+                uvs.Add(new Vector2(j / (float)circleResolution, normalizedHeight));
+                heights.Add(new Vector2(totalHeight, 0));
             }
         }
 
-        // Generate triangles between consecutive cross sections
-        for (int i = 0; i < segments - 1; i++)
+        // generate triangles
+        for (int i = 0; i < waveformValues.Length; i++)
         {
-            int startIndex = i * circleResolution;
-            int nextIndex = (i + 1) * circleResolution;
-
+            int baseIndex = i * circleResolution;
             for (int j = 0; j < circleResolution; j++)
             {
-                int current = startIndex + j;
-                int next = startIndex + (j + 1) % circleResolution;
-                int top = nextIndex + j;
-                int topNext = nextIndex + (j + 1) % circleResolution;
-
-                triangles.Add(current);
-                triangles.Add(next);
-                triangles.Add(top);
-
-                triangles.Add(next);
-                triangles.Add(topNext);
-                triangles.Add(top);
+                int nextJ = (j + 1) % circleResolution;
+                
+                // 1st triangle (ccw)
+                triangles.Add(baseIndex + j);
+                triangles.Add(baseIndex + nextJ);
+                triangles.Add(baseIndex + circleResolution + j);
+                
+                // 2nd triangle
+                triangles.Add(baseIndex + nextJ);
+                triangles.Add(baseIndex + circleResolution + nextJ);
+                triangles.Add(baseIndex + circleResolution + j);
             }
         }
 
-        // Create mesh
+        // add top and bottom caps
+        int bottomStart = 0;
+        int topStart = vertices.Count - circleResolution;
+
+        // bottom cap
+        for (int i = 1; i < circleResolution - 1; i++)
+        {
+            triangles.Add(bottomStart);
+            triangles.Add(bottomStart + i);
+            triangles.Add(bottomStart + i + 1);
+        }
+
+        // top cap
+        for (int i = 1; i < circleResolution - 1; i++)
+        {
+            triangles.Add(topStart);
+            triangles.Add(topStart + i + 1);
+            triangles.Add(topStart + i);
+        }
+
         Mesh mesh = new Mesh
         {
             name = "WaveformCylinderMesh",
@@ -452,6 +337,170 @@ public class WaveformVisualizer : MonoBehaviour
         return mesh;
     }
 
+    public void VisualizeData(List<CSVParser.GEDIDataPoint> dataPoints)
+    {
+        gridPositions.Clear();
+
+        Dictionary<Vector2Int, List<CSVParser.GEDIDataPoint>> grid = new Dictionary<Vector2Int, List<CSVParser.GEDIDataPoint>>();
+
+        foreach (var point in dataPoints)
+        {
+            int xIndex = Mathf.FloorToInt((point.longitude - referenceLongitude) / gridCellSize);
+            int yIndex = Mathf.FloorToInt((point.latitude - referenceLatitude) / gridCellSize);
+            Vector2Int gridIndex = new Vector2Int(xIndex, yIndex);
+
+            if (!grid.ContainsKey(gridIndex))
+            {
+                grid[gridIndex] = new List<CSVParser.GEDIDataPoint>();
+            }
+            grid[gridIndex].Add(point);
+        }
+        
+        Debug.Log($"Total Grid Cells: {grid.Count}");
+
+        if (visualizePopulated)
+        {
+            if (grid.Count == 0)
+            {
+                Debug.LogWarning("No grid cells to process.");
+                return;
+            }
+
+            var mostPopulatedCell = grid.OrderByDescending(cell => cell.Value.Count).First();
+            Vector2Int targetGridIndex = mostPopulatedCell.Key;
+            List<CSVParser.GEDIDataPoint> targetCellPoints = mostPopulatedCell.Value;
+            string lats = "";
+
+            Debug.Log($"Most Populated Grid Cell: {targetGridIndex} with {targetCellPoints.Count} points.");
+
+            foreach (var point in targetCellPoints)
+            {
+                float selectedRH = GetSelectedRHValue(point);
+
+                if (!IsHeightValid(selectedRH))
+                {
+                    Debug.Log($"Skipping waveform at ({point.latitude}, {point.longitude}) with height {selectedRH}m below threshold.");
+                    continue;
+                }
+                Vector3 position = LatLong2Unity(point.latitude, point.longitude, point.elevation);
+                lats = lats + ", " + point.latitude;
+
+                CreateCylinder(position, point, selectedRH);
+            }
+            lats = lats.Substring(2);
+        }
+        else
+        {
+            foreach (var cell in grid)
+            {
+                Vector2Int gridIndex = cell.Key;
+                List<CSVParser.GEDIDataPoint> cellPoints = cell.Value;
+
+                if (cellPoints == null || cellPoints.Count == 0)
+                    continue;
+
+                CSVParser.GEDIDataPoint selectedPoint = cellPoints[UnityEngine.Random.Range(0, cellPoints.Count)];
+                float selectedRH = GetSelectedRHValue(selectedPoint);
+
+                if (!IsHeightValid(selectedRH))
+                {
+                    Debug.Log($"Skipping waveform at ({selectedPoint.latitude}, {selectedPoint.longitude}) with height {selectedRH}m below threshold.");
+                    continue;
+                }
+
+                Vector3 position = LatLong2Unity(selectedPoint.latitude, selectedPoint.longitude, selectedPoint.elevation);
+                CreateCylinder(position, selectedPoint, selectedRH);
+            }
+        }
+
+        CreateTerrainMesh(terrainPoints);
+        Debug.Log($"lat: {referenceLatitude}, long: {referenceLongitude}");
+    }
+
+    // private void CreateTerrainMesh(Dictionary<Vector2Int, Vector3> points)
+    // {
+    //     if (points.Count == 0)
+    //     {
+    //         Debug.LogWarning("No points to create terrain from!");
+    //         return;
+    //     }
+
+    //     float minX = float.MaxValue, maxX = float.MinValue;
+    //     float minZ = float.MaxValue, maxZ = float.MinValue;
+    //     float minY = float.MaxValue, maxY = float.MinValue;
+
+    //     foreach (var point in points.Values)
+    //     {
+    //         minX = Mathf.Min(minX, point.x);
+    //         maxX = Mathf.Max(maxX, point.x);
+    //         minZ = Mathf.Min(minZ, point.z);
+    //         maxZ = Mathf.Max(maxZ, point.z);
+    //         minY = Mathf.Min(minY, point.y);
+    //         maxY = Mathf.Max(maxY, point.y);
+    //     }
+
+    //     int resolution = 200;
+    //     float terrainWidth = maxX - minX;
+    //     float terrainLength = maxZ - minZ;
+    //     float cellSizeX = terrainWidth / (resolution - 1);
+    //     float cellSizeZ = terrainLength / (resolution - 1);
+
+    //     Vector3[] vertices = new Vector3[resolution * resolution];
+    //     int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
+    //     Vector2[] uvs = new Vector2[vertices.Length];
+
+    //     float influenceRadius = Mathf.Max(terrainWidth, terrainLength) / 10f;
+    //     float falloffFactor = 75f;
+
+    //     for (int z = 0; z < resolution; z++)
+    //     {
+    //         for (int x = 0; x < resolution; x++)
+    //         {
+    //             float xPos = minX + x * cellSizeX;
+    //             float zPos = minZ + z * cellSizeZ;
+    //             int index = z * resolution + x;
+
+    //             float height = CalculateRBFHeight(new Vector3(xPos, 0, zPos), points.Values.ToList(), 
+    //                                         influenceRadius, falloffFactor, minY);
+
+    //             vertices[index] = new Vector3(xPos, height, zPos);
+    //             uvs[index] = new Vector2(x / (float)(resolution - 1), z / (float)(resolution - 1));
+    //         }
+    //     }
+
+    //     int tris = 0;
+    //     for (int z = 0; z < resolution - 1; z++)
+    //     {
+    //         for (int x = 0; x < resolution - 1; x++)
+    //         {
+    //             int vertexIndex = z * resolution + x;
+
+    //             triangles[tris] = vertexIndex;
+    //             triangles[tris + 1] = vertexIndex + resolution;
+    //             triangles[tris + 2] = vertexIndex + 1;
+    //             triangles[tris + 3] = vertexIndex + 1;
+    //             triangles[tris + 4] = vertexIndex + resolution;
+    //             triangles[tris + 5] = vertexIndex + resolution + 1;
+
+    //             tris += 6;
+    //         }
+    //     }
+
+    //     GameObject terrainObject = new GameObject("Terrain");
+    //     MeshFilter meshFilter = terrainObject.AddComponent<MeshFilter>();
+    //     MeshRenderer meshRenderer = terrainObject.AddComponent<MeshRenderer>();
+    //     meshRenderer.material = terrainMaterial;
+
+    //     Mesh mesh = new Mesh();
+    //     mesh.vertices = vertices;
+    //     mesh.triangles = triangles;
+    //     mesh.uv = uvs;
+    //     mesh.RecalculateNormals();
+
+    //     meshFilter.mesh = mesh;
+    // }
+    
+    // WIRE FRAME MODE
     private void CreateTerrainMesh(Dictionary<Vector2Int, Vector3> points)
     {
         if (points.Count == 0)
@@ -460,7 +509,6 @@ public class WaveformVisualizer : MonoBehaviour
             return;
         }
 
-        // find bounds
         float minX = float.MaxValue, maxX = float.MinValue;
         float minZ = float.MaxValue, maxZ = float.MinValue;
         float minY = float.MaxValue, maxY = float.MinValue;
@@ -475,21 +523,17 @@ public class WaveformVisualizer : MonoBehaviour
             maxY = Mathf.Max(maxY, point.y);
         }
 
-        // resolution of terrain
         int resolution = 200;
         float terrainWidth = maxX - minX;
         float terrainLength = maxZ - minZ;
         float cellSizeX = terrainWidth / (resolution - 1);
         float cellSizeZ = terrainLength / (resolution - 1);
 
-        // mesh data arrays
         Vector3[] vertices = new Vector3[resolution * resolution];
-        int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
         Vector2[] uvs = new Vector2[vertices.Length];
 
-        // RBF interpolation
-        float influenceRadius = Mathf.Max(terrainWidth, terrainLength) / 10f; // control smoothness
-        float falloffFactor = 75f; // controls how quickly the influence falls off with distance
+        float influenceRadius = Mathf.Max(terrainWidth, terrainLength) / 10f;
+        float falloffFactor = 75f;
 
         // generate vertices
         for (int z = 0; z < resolution; z++)
@@ -500,7 +544,6 @@ public class WaveformVisualizer : MonoBehaviour
                 float zPos = minZ + z * cellSizeZ;
                 int index = z * resolution + x;
 
-                // calc height using RBF interpolation
                 float height = CalculateRBFHeight(new Vector3(xPos, 0, zPos), points.Values.ToList(), 
                                             influenceRadius, falloffFactor, minY);
 
@@ -509,37 +552,51 @@ public class WaveformVisualizer : MonoBehaviour
             }
         }
 
-        // generate triangles
-        int tris = 0;
-        for (int z = 0; z < resolution - 1; z++)
+        // line indices for the wireframe
+        List<int> lines = new List<int>();
+
+        // horizontal lines
+        for (int z = 0; z < resolution; z++)
         {
             for (int x = 0; x < resolution - 1; x++)
             {
-                int vertexIndex = z * resolution + x;
-
-                triangles[tris] = vertexIndex;
-                triangles[tris + 1] = vertexIndex + resolution;
-                triangles[tris + 2] = vertexIndex + 1;
-                triangles[tris + 3] = vertexIndex + 1;
-                triangles[tris + 4] = vertexIndex + resolution;
-                triangles[tris + 5] = vertexIndex + resolution + 1;
-
-                tris += 6;
+                int index = z * resolution + x;
+                lines.Add(index);
+                lines.Add(index + 1);
             }
         }
 
-        // create mesh
-        GameObject terrainObject = new GameObject("Terrain");
+        // vertical lines
+        for (int x = 0; x < resolution; x++)
+        {
+            for (int z = 0; z < resolution - 1; z++)
+            {
+                int index = z * resolution + x;
+                lines.Add(index);
+                lines.Add(index + resolution);
+            }
+        }
+
+        GameObject terrainObject = new GameObject("TerrainWireframe");
         MeshFilter meshFilter = terrainObject.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = terrainObject.AddComponent<MeshRenderer>();
         meshRenderer.material = terrainMaterial;
 
+        // mesh
+        Mesh mesh = new Mesh();
         mesh.vertices = vertices;
-        mesh.triangles = triangles;
+        mesh.SetIndices(lines.ToArray(), MeshTopology.Lines, 0);
         mesh.uv = uvs;
-        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
 
         meshFilter.mesh = mesh;
+
+        // render wireframes
+        terrainMaterial.SetFloat("_Wireframe", 1);
+        if (terrainMaterial.HasProperty("_WireframeColor"))
+        {
+            terrainMaterial.SetColor("_WireframeColor", Color.white);
+        }
     }
 
     private float CalculateRBFHeight(Vector3 position, List<Vector3> points, 
@@ -558,7 +615,6 @@ public class WaveformVisualizer : MonoBehaviour
 
             if (distance < maxInfluenceDistance)
             {
-                // calculate weight using fall off function
                 float weight = Mathf.Exp(-falloffFactor * (distance * distance) / 
                                     (influenceRadius * influenceRadius));
 
