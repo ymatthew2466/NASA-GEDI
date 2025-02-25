@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaf0b2df0d2f4ce3a6b76688fbc4d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: Assets/Data/rainforest_adaptive_slanted.csv
+  filePath: Assets/Data/forest_adaptive_slanted.csv
 --- !u!4 &1389572231
 Transform:
   m_ObjectHideFlags: 0
