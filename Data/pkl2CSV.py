@@ -228,7 +228,7 @@ import sys
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-def adaptive_downsample(waveform, similarity_threshold=0, min_segment_length=3):
+def adaptive_downsample(waveform, similarity_threshold=6, min_segment_length=3):
     # returns tuple of (downsampled_values, segment_lengths)
     downsampled = []
     segment_lengths = []
@@ -263,7 +263,8 @@ with open('./pkls/Forest_cs237_2024_ISS.pkl', 'rb') as f:
 
 def area_filter(lng, lat):
     # return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
-    return (lng>-72) & (lng<-71) & (lat>46) & (lat<47)
+    # return (lng>-72) & (lng<-71) & (lat>46) & (lat<47) # default forest
+    return (lng>-71.5) & (lng<-71.4) & (lat>46.5) & (lat<46.6) # small forest
     # return (lng>-82.7) & (lng<-82.6) & (lat>51.7) & (lat<51.8)
     # return (lng>-60.45) & (lng<-60.25) & (lat>2.25) & (lat<2.45)
     # return True
@@ -328,4 +329,4 @@ for i in range(len(data['prop'])):
     print('iter: ', i)
 
 df = pd.DataFrame(data_list)
-df.to_csv('forest_adaptive_slanted.csv', index=False)
+df.to_csv('forest_adapt_6_small.csv', index=False)

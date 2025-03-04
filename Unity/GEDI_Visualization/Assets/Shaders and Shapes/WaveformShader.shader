@@ -79,10 +79,18 @@ Shader "Custom/WaveformShader"
                 float currentHeight = normalizedHeight * totalHeight;
 
                 // static height threshold
-                float height1 = 5.0; 
-                float height2 = 15.0;
-                float height3 = 30.0;
-                float height4 = 50.0; 
+                // float height1 = 5.0; 
+                // float height2 = 15.0;
+                // float height3 = 30.0;
+                // float height4 = 50.0; 
+
+                // Update these lines in your shader
+                float height1 = 5.0 * 0.02; // 0.1
+                float height2 = 15.0 * 0.02; // 0.3
+                float height3 = 30.0 * 0.02; // 0.6
+                float height4 = 50.0 * 0.02; // 1.0
+
+
                 // float height5 = 20.0;
                 // above: red
 
