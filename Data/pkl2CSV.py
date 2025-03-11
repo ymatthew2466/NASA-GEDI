@@ -258,6 +258,7 @@ for i in range(len(data['prop'])):
 
     # Adaptive downsampling of raw waveform
     raw_waveform = data['y'][i]
+    # normalize raw waveform here
     downsampled_values, segment_lengths, physical_positions = adaptive_downsample(raw_waveform)
     
     # Convert to strings and combine with delimiter

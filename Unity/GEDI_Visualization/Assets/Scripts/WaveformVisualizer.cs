@@ -129,8 +129,8 @@ public class WaveformVisualizer : MonoBehaviour
         float z = latInMeters * positionScale * Globals.SCALE;
 
         // EXTREME ELEVATION
-        // return new Vector3(x, elevation*0.01f, z);
-        return new Vector3(x, elevation*0.75f, z);
+        return new Vector3(x, elevation*0.01f, z);
+        // return new Vector3(x, elevation*0.75f, z);
     }
 
     // New helper method to calculate direction from ground to ISS
