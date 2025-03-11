@@ -26,12 +26,15 @@ public class CSVParser : MonoBehaviour {
         public string rhWaveform;
         public float[] rawWaveformValues;
         public int[] rawWaveformLengths;
+        public float[] rawWaveformPositions;
+
 
         public GEDIDataPoint(float latitude, float longitude, float elevation, 
                             float instrumentLat, float instrumentLon, float instrumentAlt,
                             float lowestLat, float lowestLon, float lowestElev,
                             float wgs84Elevation, float rh2, float rh50, float rh98, 
-                            string rhWaveform, string rawWaveformValues, string rawWaveformLengths)
+                            string rhWaveform, string rawWaveformValues, string rawWaveformLengths,
+                            string rawWaveformPositions)
         {
             this.latitude = latitude;
             this.longitude = longitude;
@@ -47,13 +50,16 @@ public class CSVParser : MonoBehaviour {
             this.rh50 = rh50;
             this.rh98 = rh98;
             this.rhWaveform = rhWaveform;
+
             
             // adaptive downsampled waveform data
             string[] valueStrings = rawWaveformValues.Split(',');
             string[] lengthStrings = rawWaveformLengths.Split(',');
+            string[] positionStrings = rawWaveformPositions.Split(',');
             
             this.rawWaveformValues = new float[valueStrings.Length];
             this.rawWaveformLengths = new int[lengthStrings.Length];
+            this.rawWaveformPositions = new float[positionStrings.Length];
             
             for (int i = 0; i < valueStrings.Length; i++)
             {
@@ -63,6 +69,10 @@ public class CSVParser : MonoBehaviour {
             for (int i = 0; i < lengthStrings.Length; i++)
             {
                 int.TryParse(lengthStrings[i], out this.rawWaveformLengths[i]);
+            }
+            for (int i = 0; i < positionStrings.Length; i++) // Parse position values
+            {
+                float.TryParse(positionStrings[i], out this.rawWaveformPositions[i]);
             }
         }
     }
@@ -101,6 +111,7 @@ public class CSVParser : MonoBehaviour {
                 string rhWaveform = fields[13];
                 string rawWaveformValues = fields[14];
                 string rawWaveformLengths = fields[15];
+                string rawWaveformPositions = fields[16];
 
                 // new data point and add it to the list
                 GEDIDataPoint dataPoint = new GEDIDataPoint(
@@ -108,7 +119,8 @@ public class CSVParser : MonoBehaviour {
                     instrumentLat, instrumentLon, instrumentAlt,
                     lowestLat, lowestLon, lowestElev,
                     wgs84Elevation, rh2, rh50, rh98, 
-                    rhWaveform, rawWaveformValues, rawWaveformLengths
+                    rhWaveform, rawWaveformValues, rawWaveformLengths, 
+                    rawWaveformPositions
                 );
 
                 dataPoints.Add(dataPoint);
