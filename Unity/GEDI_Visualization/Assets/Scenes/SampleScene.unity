@@ -176,9 +176,9 @@ MonoBehaviour:
   selectedRHField: 2
   waveformHeightThreshold: -5
   waveformEnergyThreshold: 0
-  terrainTexture: {fileID: 2800000, guid: b85face1fdc4b455ebbf08ec8d7e5225, type: 3}
+  terrainTexture: {fileID: 2800000, guid: 78cf62978829249c69dd0665b480ab5f, type: 3}
   WireframeToggleGEDITerrain: {fileID: 507928775}
-  textureGeoBounds: {x: -71.6, y: -71.4, z: 46.4, w: 46.6}
+  textureGeoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
 --- !u!114 &66978045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,8 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a35c050911042af8a3067f09718328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireframeMaterial: {fileID: 0}
-  mainMeshMaterial: {fileID: 0}
 --- !u!23 &66978046
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -434,6 +432,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &327450248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327450249}
+  - component: {fileID: 327450252}
+  - component: {fileID: 327450251}
+  - component: {fileID: 327450250}
+  m_Layer: 0
+  m_Name: TerrainMapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327450249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327450248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 96.66669, y: 32.66667, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &327450250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327450248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8488bfc2e6146445bafb2952127b2810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  demTexture: {fileID: 2800000, guid: 60b184cec7d084d15815732cbc592aaa, type: 3}
+  geoBounds: {x: -71.5, y: -71.4, z: -46.6, w: -46.5}
+  terrainWidth: 1000
+  terrainDepth: 1000
+  resolution: 256
+--- !u!23 &327450251
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327450248}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &327450252
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327450248}
+  m_Mesh: {fileID: 0}
 --- !u!1 &328148684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaf0b2df0d2f4ce3a6b76688fbc4d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: Assets/Data/forest_adapt0_medium.csv
+  filePath: Assets/Data/mapia_adapt0.csv
 --- !u!4 &1389572231
 Transform:
   m_ObjectHideFlags: 0
@@ -1817,6 +1918,7 @@ SceneRoots:
   - {fileID: 2104034155}
   - {fileID: 1389572231}
   - {fileID: 66978043}
+  - {fileID: 327450249}
   - {fileID: 1246874292}
   - {fileID: 1989215330}
   - {fileID: 1749503153}

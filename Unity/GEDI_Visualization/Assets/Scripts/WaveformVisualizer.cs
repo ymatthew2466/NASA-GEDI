@@ -82,7 +82,7 @@ public class WaveformVisualizer : MonoBehaviour
                 referenceLatitude = dataPoints[0].latitude;
                 referenceLongitude = dataPoints[0].longitude;
                 referenceElevation = dataPoints[0].elevation;
-                Debug.Log($"reference height {referenceElevation}");
+                // Debug.Log($"reference height {referenceElevation}");
 
                 VisualizeData(dataPoints);
             }
@@ -401,7 +401,7 @@ public class WaveformVisualizer : MonoBehaviour
         }
         
         // accumulated original samples
-        int accumulatedSamples = 0;
+        // int accumulatedSamples = 0;
         
         // vertices for each layer
         for (int i = 0; i <= waveformValues.Length; i++)
@@ -508,7 +508,7 @@ public class WaveformVisualizer : MonoBehaviour
         int validCount = 0;
         int totalCount = dataPoints.Count;
 
-        Debug.Log($"Processing {dataPoints.Count} total waveforms...");
+        // Debug.Log($"Processing {dataPoints.Count} total waveforms...");
 
         foreach (var point in dataPoints)
         {
@@ -524,9 +524,9 @@ public class WaveformVisualizer : MonoBehaviour
             validCount++;
         }
 
-        Debug.Log($"Created {validCount} waveforms out of {totalCount} total points.");
+        // Debug.Log($"Created {validCount} waveforms out of {totalCount} total points.");
         CreateTerrainMeshDELNET(terrainPoints);
-        Debug.Log($"Reference coordinates - Lat: {referenceLatitude}, Long: {referenceLongitude}");
+        // Debug.Log($"Reference coordinates - Lat: {referenceLatitude}, Long: {referenceLongitude}");
     }
 
 

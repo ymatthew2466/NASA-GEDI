@@ -199,7 +199,7 @@ def adaptive_downsample(waveform, similarity_threshold=0, min_segment_length=3):
     return np.array(downsampled), np.array(segment_lengths), np.array(physical_positions)
 
 
-with open('./pkls/Forest_cs237_2024_ISS.pkl', 'rb') as f:
+with open('./pkls/SA_174.pkl', 'rb') as f:
     data = pickle.load(f)
 
 def area_filter(lng, lat):
@@ -211,9 +211,12 @@ def area_filter(lng, lat):
     #     return True
     # return (lng>-56.9) & (lng<-56.6) & (lat>-18.2) & (lat<-17.9)
     # return (lng>-72) & (lng<-71) & (lat>46) & (lat<47) # default forest
-    return (lng>-71.6) & (lng<-71.4) & (lat>46.4) & (lat<46.6) # small forests
+    # return (lng>-71.6) & (lng<-71.4) & (lat>46.4) & (lat<46.6) # small forests
     # return (lng>-82.7) & (lng<-82.6) & (lat>51.7) & (lat<51.8)
     # return (lng>-60.45) & (lng<-60.25) & (lat>2.25) & (lat<2.45)
+    # return (lng>-70) & (lng<-68) & (lat>-9.75) & (lat<-7.75)  # mapia
+    return (lng>-69) & (lng<-68.5) & (lat>-9) & (lat<-8.5)  # mapia small
+
     # return True
 
 data_list = []
@@ -288,4 +291,4 @@ for i in range(len(data['prop'])):
     print('iter: ', i)
 
 df = pd.DataFrame(data_list)
-df.to_csv('csvs/forest_adapt0_medium.csv', index=False)
+df.to_csv('csvs/mapia_adapt0.csv', index=False)

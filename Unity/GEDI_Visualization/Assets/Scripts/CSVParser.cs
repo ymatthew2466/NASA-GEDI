@@ -130,7 +130,7 @@ public class CSVParser : MonoBehaviour {
             }
         }
         
-        Debug.Log($"Loaded {dataPoints.Count} data points from CSV.");
+        // Debug.Log($"Loaded {dataPoints.Count} data points from CSV.");
     }
 
     public static List<string> ParseCSVLine(string line) {
