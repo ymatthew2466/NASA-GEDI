@@ -46,7 +46,7 @@ public class CameraControllerMouse : MonoBehaviour
         {
             riseInput = 1f;
         }
-        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))  // Ctrl key to move down
+        if (Input.GetKey(KeyCode.C))  // Ctrl key to move down
         {
             riseInput = -1f;
         }
@@ -77,8 +77,8 @@ public class CameraControllerMouse : MonoBehaviour
             Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
 
             // Rotate the camera around the Y-axis (horizontal rotation) and X-axis (vertical rotation)
-            float yaw = mouseDelta.x * rotationSpeed * Time.deltaTime;
-            float pitch = -mouseDelta.y * rotationSpeed * Time.deltaTime;
+            float yaw = mouseDelta.x * speedScale * rotationSpeed * Time.deltaTime;
+            float pitch = -mouseDelta.y * speedScale * rotationSpeed * Time.deltaTime;
 
             transform.RotateAround(transform.position, Vector3.up, yaw);   // Horizontal rotation
             transform.RotateAround(transform.position, transform.right, pitch); // Vertical rotation
@@ -89,20 +89,20 @@ public class CameraControllerMouse : MonoBehaviour
         else 
         {
             float horizontalRotation = 0f;
-            if (Input.GetKey(KeyCode.K))  // Space key to move up
+            if (Input.GetKey(KeyCode.L))  // spin left
             {
                 horizontalRotation = 1f;
             }
-            if (Input.GetKey(KeyCode.J))  // Ctrl key to move down
+            if (Input.GetKey(KeyCode.J))  // spin right
             {
                 horizontalRotation = -1f;
             }
             float verticalRotation = 0f;
-            if (Input.GetKey(KeyCode.U))  // Space key to move up
+            if (Input.GetKey(KeyCode.K))  // roll up
             {
                 verticalRotation = 1f;
             }
-            if (Input.GetKey(KeyCode.I))  // Ctrl key to move down
+            if (Input.GetKey(KeyCode.I))  // roll down
             {
                 verticalRotation = -1f;
             }
@@ -112,7 +112,7 @@ public class CameraControllerMouse : MonoBehaviour
             float pitch = verticalRotation * rotationSpeed * speedScale * Time.deltaTime;
 
             transform.RotateAround(transform.position, Vector3.up, yaw);   // Horizontal rotation
-            transform.RotateAround(transform.position, Vector3.right, pitch);   // Vertical rotation
+            transform.RotateAround(transform.position, transform.right, pitch);   // Vertical rotation
         }
     }
 
