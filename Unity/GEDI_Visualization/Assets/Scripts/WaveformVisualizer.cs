@@ -45,6 +45,7 @@ public class WaveformVisualizer : MonoBehaviour
     
 
     [Tooltip("Geographic bounds: [West, East, South, North]")]
+    public Vector4 geoBounds = new Vector4(-71.5f, -71.4f, -46.5f, -46.6f); // left, right, bottom, top
     public Vector4 textureGeoBounds = new Vector4(-71.5f, -71.4f, -46.5f, -46.6f); // left, right, bottom, top
                         // (lng>-71.5) & (lng<-71.4) & (lat>46.5) & (lat<46.6)
     private float referenceLatitude;
@@ -56,6 +57,10 @@ public class WaveformVisualizer : MonoBehaviour
 
     void Start()
     {
+        referenceLongitude = (geoBounds.x + geoBounds.y)/2f;
+        referenceLatitude = (geoBounds.z + geoBounds.w)/2f;
+        referenceElevation = 50f;  // haven't thought of a good way to set this
+
         if (csvParser != null)
         {
             if (csvParser.getDataPoints() == null || csvParser.getDataPoints().Count == 0)
@@ -66,11 +71,6 @@ public class WaveformVisualizer : MonoBehaviour
             List<CSVParser.GEDIDataPoint> dataPoints = csvParser.getDataPoints();
             if (dataPoints != null && dataPoints.Count > 0)
             {
-                referenceLatitude = dataPoints[0].latitude;
-                referenceLongitude = dataPoints[0].longitude;
-                referenceElevation = dataPoints[0].elevation;
-                // Debug.Log($"reference height {referenceElevation}");
-
                 VisualizeData(dataPoints);
             }
             else

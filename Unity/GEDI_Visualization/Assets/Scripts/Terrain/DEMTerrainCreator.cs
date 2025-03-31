@@ -14,6 +14,7 @@ public class DEMTerrainCreator : MonoBehaviour
     
     [Tooltip("Geographic bounds [West, East, South, North]")]
     public Vector4 geoBounds = new Vector4(-71.5f, -71.4f, -46.6f, -46.5f);
+    public Vector4 textureBounds = new Vector4(-71.5f, -71.4f, -46.6f, -46.5f);
     
     [Tooltip("Multiplier to convert DEM values to Unity units (affects terrain elevation).")]
     public int resolution = 256;
@@ -23,6 +24,9 @@ public class DEMTerrainCreator : MonoBehaviour
     private bool showDemTerrain;
     private Mesh terrainMesh;
 
+    private float referenceLatitude;
+    private float referenceLongitude;
+    private float referenceElevation;
     void Start()
     {
         if (demSource == null)
@@ -35,6 +39,9 @@ public class DEMTerrainCreator : MonoBehaviour
         MeshFilter meshFilter = terrainDEM.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = terrainDEM.AddComponent<MeshRenderer>();
 
+        referenceLongitude = (geoBounds.x + geoBounds.y)/2f;
+        referenceLatitude = (geoBounds.z + geoBounds.w)/2f;
+        referenceElevation = 50f;
 
         float height = (geoBounds.w - geoBounds.z) * 111000f * Params.SCALE;
         float cosLat = Mathf.Cos(geoBounds.z * Mathf.Deg2Rad);
@@ -47,6 +54,11 @@ public class DEMTerrainCreator : MonoBehaviour
         meshRenderer.material = terrainMaterial;
 
         terrainDEM.transform.localScale = new Vector3(width, 1, height);
+
+        float translate_x = (geoBounds.x - referenceLongitude) * 111000f * Params.SCALE;
+        float translate_y = (0 - referenceElevation) * Params.TerrainScale;
+        float translate_z = (geoBounds.z - referenceLatitude) * 111000f * cosLat * Params.SCALE;
+        terrainDEM.transform.Translate(translate_x, translate_y, translate_z, Space.World);
 
         showDemTerrain = true;
         ToggleTerrain();
@@ -74,7 +86,10 @@ public class DEMTerrainCreator : MonoBehaviour
                 // Debug.Log(demValue);
 
                 vertices.Add(new Vector3(u, demValue, v));
-                uvs.Add(new Vector2(u, v));
+
+                float world_u = (u * (geoBounds.y - geoBounds.x) + geoBounds.x - textureBounds.x ) / (textureBounds.y - textureBounds.x);
+                float world_v = (v * (geoBounds.w - geoBounds.z) + geoBounds.z - textureBounds.z ) / (textureBounds.w - textureBounds.z);
+                uvs.Add(new Vector2(world_u, world_v));
             }
         }
 
