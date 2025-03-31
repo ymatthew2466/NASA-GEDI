@@ -53,7 +53,8 @@ public class WaveformTools
                 waveformValues[i] : 
                 waveformValues[waveformValues.Length - 1];
 
-            radius = radius * Params.SCALE * 0.5f;
+            radius = radius * Params.SCALE * 0.3f;
+            radius = Math.Clamp(radius, 0f, 120f * Params.SCALE);
             
             // create vertices for this circle
             for (int j = 0; j < circleResolution; j++)

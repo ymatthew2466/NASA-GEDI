@@ -157,7 +157,6 @@
     <Compile Include="Assets\Triangle\Tools\VertexSorter.cs" />
     <Compile Include="Assets\Triangle.Rendering\IRenderControl.cs" />
     <Compile Include="Assets\Triangle\TriangleLocator.cs" />
-    <Compile Include="Assets\Scripts\Terrain\RefTerrainMapper.cs" />
     <Compile Include="Assets\Triangle\TriangleSampler.cs" />
     <Compile Include="Assets\Triangle\RobustPredicates.cs" />
     <Compile Include="Assets\Scripts\Controls\CameraController.cs" />
