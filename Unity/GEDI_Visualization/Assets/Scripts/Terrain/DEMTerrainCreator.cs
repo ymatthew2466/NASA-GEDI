@@ -39,8 +39,6 @@ public class DEMTerrainCreator : MonoBehaviour
         float height = (geoBounds.w - geoBounds.z) * 111000f * Params.SCALE;
         float cosLat = Mathf.Cos(geoBounds.z * Mathf.Deg2Rad);
         float width = (geoBounds.y - geoBounds.x) * 111000f * cosLat * Params.SCALE;
-        Debug.Log(width);
-        Debug.Log(height);
 
         terrainMaterial.mainTexture = demTexture;
         
@@ -63,7 +61,6 @@ public class DEMTerrainCreator : MonoBehaviour
         List<int> triangles = new List<int>();
         List<Vector2> uvs = new List<Vector2>();
 
-        int index = 0;
         for (int z = 0; z < verticesPerSide; z++)
         {
             for (int x = 0; x < verticesPerSide; x++)
@@ -77,10 +74,7 @@ public class DEMTerrainCreator : MonoBehaviour
                 // Debug.Log(demValue);
 
                 vertices.Add(new Vector3(u, demValue, v));
-
-                Debug.Log(new Vector3(u, demValue, v));
                 uvs.Add(new Vector2(u, v));
-                index++;
             }
         }
 
@@ -105,6 +99,7 @@ public class DEMTerrainCreator : MonoBehaviour
 
         // Create and assign the mesh.
         Mesh unityMesh = new Mesh();
+        unityMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         unityMesh.vertices = vertices.ToArray();
         unityMesh.triangles = triangles.ToArray();
         unityMesh.uv = uvs.ToArray();
