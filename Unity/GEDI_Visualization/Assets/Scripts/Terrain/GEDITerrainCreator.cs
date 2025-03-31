@@ -7,7 +7,7 @@ using TriangleNet.Geometry;
 
 public class GEDITerrainCreator
 {
-    
+
     public static Mesh generateWireframe(Polygon polygon, Dictionary<int, TerrainPoint> pointMap)
     {
         // build wireframe mesh

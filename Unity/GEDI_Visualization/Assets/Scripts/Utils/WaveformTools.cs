@@ -20,7 +20,7 @@ public class WaveformTools
         
         // calc actual height
         float actualHeight = 76.8f;
-        float totalHeight = actualHeight * Params.SCALE;
+        float totalHeight = actualHeight * Params.TerrainScale;
         
         // precalculate the original total number of samples
         int originalTotalSamples = 0;
@@ -52,6 +52,8 @@ public class WaveformTools
             float radius = i < waveformValues.Length ? 
                 waveformValues[i] : 
                 waveformValues[waveformValues.Length - 1];
+
+            radius = radius * Params.SCALE * 0.5f;
             
             // create vertices for this circle
             for (int j = 0; j < circleResolution; j++)

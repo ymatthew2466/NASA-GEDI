@@ -1,42 +1,67 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI; // Required for UI elements
+using System.Collections.Generic;
+using TriangleNet.Geometry;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+using GEDIGlobals;
 public class DEMTerrainCreator : MonoBehaviour
 {
     [Header("DEM")]
-    public Texture2D demTexture;
+    public Material terrainMaterial;  // Material for ground terrain
+    public Texture2D demSource;
+    public Texture2D demTexture;  // Texture for ground terrain
     
     [Tooltip("Geographic bounds [West, East, South, North]")]
     public Vector4 geoBounds = new Vector4(-71.5f, -71.4f, -46.6f, -46.5f);
     
     [Tooltip("Multiplier to convert DEM values to Unity units (affects terrain elevation).")]
-
-    [Header("Terrain Dimensions // REMOVE LATER")]
-    public float terrainWidth = 1000f;
-    
-    public float terrainDepth = 1000f;
-    
-    [Tooltip("Number of vertices along one side")]
     public int resolution = 256;
+    public Button ToggleDemTerrain;
 
-    private Mesh mesh;
+    private GameObject terrainDEM;
+    private bool showDemTerrain;
+    private Mesh terrainMesh;
 
     void Start()
     {
-        if (demTexture == null)
+        if (demSource == null)
         {
-            Debug.LogError("DEM texture not assigned!");
+            Debug.LogError("DEM source not assigned!");
             return;
         }
-        GenerateTerrain();
+        
+        terrainDEM = new GameObject("DemTerrain");
+        MeshFilter meshFilter = terrainDEM.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = terrainDEM.AddComponent<MeshRenderer>();
+
+
+        float height = (geoBounds.w - geoBounds.z) * 111000f * Params.SCALE;
+        float cosLat = Mathf.Cos(geoBounds.z * Mathf.Deg2Rad);
+        float width = (geoBounds.y - geoBounds.x) * 111000f * cosLat * Params.SCALE;
+        Debug.Log(width);
+        Debug.Log(height);
+
+        terrainMaterial.mainTexture = demTexture;
+        
+        terrainMesh = GenerateTerrain(demSource, resolution);
+        meshFilter.mesh = terrainMesh;
+        meshRenderer.material = terrainMaterial;
+
+        terrainDEM.transform.localScale = new Vector3(width, 1, height);
+
+        showDemTerrain = true;
+        ToggleTerrain();
+        ToggleDemTerrain.onClick.AddListener(ToggleTerrain);
     }
 
-    void GenerateTerrain()
+    public Mesh GenerateTerrain(Texture2D demSrc, int resolution)
     {
         int verticesPerSide = resolution;
-        Vector3[] vertices = new Vector3[verticesPerSide * verticesPerSide];
-        Vector2[] uvs = new Vector2[verticesPerSide * verticesPerSide];
-        int[] triangles = new int[(verticesPerSide - 1) * (verticesPerSide - 1) * 6];
+        
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> triangles = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
 
         int index = 0;
         for (int z = 0; z < verticesPerSide; z++)
@@ -47,28 +72,19 @@ public class DEMTerrainCreator : MonoBehaviour
                 float u = x / (float)(verticesPerSide - 1);
                 float v = z / (float)(verticesPerSide - 1);
 
-                // map normalized grid position to flat world space
-                // NOTE: MUST CHANGE TO ACTUAL GEOGRAPHIC BOUNDS, NO SCALING
-                float posX = (u - 0.5f) * terrainWidth;
-                float posZ = (v - 0.5f) * terrainDepth;
-
-                // map grid u,v to geographic coordinates
-                // [West, East, South, North])
-                float longitude = Mathf.Lerp(geoBounds.x, geoBounds.y, u);
-                float latitude = Mathf.Lerp(geoBounds.z, geoBounds.w, v);
-
                 // using the grid's normalized u,v as image coordinates.
-                float demValue = demTexture.GetPixelBilinear(u, v).r;
-                float posY = demValue;
+                float demValue = demSrc.GetPixelBilinear(u, v).r * Params.TerrainScale;
+                // Debug.Log(demValue);
 
-                vertices[index] = new Vector3(posX, posY, posZ);
-                uvs[index] = new Vector2(u, v);
+                vertices.Add(new Vector3(u, demValue, v));
+
+                Debug.Log(new Vector3(u, demValue, v));
+                uvs.Add(new Vector2(u, v));
                 index++;
             }
         }
 
         // Create triangles (two per quad).
-        int triIndex = 0;
         for (int z = 0; z < verticesPerSide - 1; z++)
         {
             for (int x = 0; x < verticesPerSide - 1; x++)
@@ -78,28 +94,35 @@ public class DEMTerrainCreator : MonoBehaviour
                 int bottomLeft = (z + 1) * verticesPerSide + x;
                 int bottomRight = bottomLeft + 1;
 
-                triangles[triIndex++] = topLeft;
-                triangles[triIndex++] = bottomLeft;
-                triangles[triIndex++] = topRight;
-
-                triangles[triIndex++] = topRight;
-                triangles[triIndex++] = bottomLeft;
-                triangles[triIndex++] = bottomRight;
+                triangles.Add(topLeft);
+                triangles.Add(bottomLeft);
+                triangles.Add(topRight);
+                triangles.Add(topRight);
+                triangles.Add(bottomLeft);
+                triangles.Add(bottomRight);
             }
         }
 
         // Create and assign the mesh.
-        mesh = new Mesh
-        {
-            name = "DEM Terrain Mesh",
-            vertices = vertices,
-            triangles = triangles,
-            uv = uvs
-        };
+        Mesh unityMesh = new Mesh();
+        unityMesh.vertices = vertices.ToArray();
+        unityMesh.triangles = triangles.ToArray();
+        unityMesh.uv = uvs.ToArray();
+        unityMesh.RecalculateNormals();
+        return unityMesh;
+    }
 
-        mesh.RecalculateNormals();
+    void ToggleTerrain()
+    {
+        showDemTerrain = !showDemTerrain;
+        terrainDEM.SetActive(showDemTerrain);
 
-        MeshFilter mf = GetComponent<MeshFilter>();
-        mf.mesh = mesh;
+        if (showDemTerrain){
+            ToggleDemTerrain.GetComponentInChildren<Text>().text = "Terrain-X (on)";
+        }
+        else{
+            ToggleDemTerrain.GetComponentInChildren<Text>().text = "Terrain-X (off)";
+        }
+            
     }
 }

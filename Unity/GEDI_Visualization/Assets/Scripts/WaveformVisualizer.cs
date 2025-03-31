@@ -21,11 +21,6 @@ public class WaveformVisualizer : MonoBehaviour
     public Material terrainMaterial;  // Material for ground terrain
     public Material wireframeMaterial;
 
-    [Header("Scaling Factors")]
-    public float positionScale = 0.0001f;  // Scale factor for position (Unity units per meter)
-    public float elevationScale = 0.0001f; // Scale factor for elevation
-    public float cylinderSum = 25.0f;  // target sum for waveform normalization
-
     private Dictionary<Vector2Int, Vector3> gridPositions = new Dictionary<Vector2Int, Vector3>();
 
     [Header("Filtering Options")]
@@ -100,10 +95,9 @@ public class WaveformVisualizer : MonoBehaviour
         float cosLat = Mathf.Cos(referenceLatitude * Mathf.Deg2Rad);
         float lonInMeters = lonDiff * 111000f * cosLat;
 
-        float x = lonInMeters * positionScale * Params.SCALE;
-        float y = elevDiff * elevationScale * Params.SCALE;
-        float z = latInMeters * positionScale * Params.SCALE;
-
+        float x = lonInMeters * Params.SCALE;
+        float y = elevDiff * Params.TerrainScale;
+        float z = latInMeters * Params.SCALE;
 
         // EXTREME ELEVATION
         return new Vector3(x, y, z);
@@ -276,6 +270,7 @@ public class WaveformVisualizer : MonoBehaviour
             meshFilter.mesh = terrainSolidGEDI;
             meshRenderer.material = terrainMaterial;
         }
-
     }
+
+
 }

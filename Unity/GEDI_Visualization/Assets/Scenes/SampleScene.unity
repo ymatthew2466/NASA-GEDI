@@ -169,10 +169,6 @@ MonoBehaviour:
   waveformMaterial: {fileID: 2100000, guid: d453bc3c660744436b3f06ccbc560685, type: 2}
   terrainMaterial: {fileID: 2100000, guid: 066189fb6b26b4b69a98f261e787fdde, type: 2}
   wireframeMaterial: {fileID: 2100000, guid: c03e0afd6f4044807967aecfecb67789, type: 2}
-  positionScale: 0.8
-  elevationScale: 5
-  cylinderSum: 40
-  selectedRHField: 2
   waveformHeightThreshold: -5
   waveformEnergyThreshold: 0
   terrainTexture: {fileID: 2800000, guid: 78cf62978829249c69dd0665b480ab5f, type: 3}
@@ -465,11 +461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8488bfc2e6146445bafb2952127b2810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrainMaterial: {fileID: 2100000, guid: 066189fb6b26b4b69a98f261e787fdde, type: 2}
+  demSource: {fileID: 2800000, guid: 1da5afd16ad5d7148b07f337a8f38b5a, type: 3}
   demTexture: {fileID: 2800000, guid: 78cf62978829249c69dd0665b480ab5f, type: 3}
-  geoBounds: {x: -71.5, y: -71.4, z: -46.6, w: -46.5}
-  terrainWidth: 1000
-  terrainDepth: 1000
-  resolution: 256
+  geoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
+  resolution: 512
+  ToggleDemTerrain: {fileID: 198993749}
 --- !u!23 &327450251
 MeshRenderer:
   m_ObjectHideFlags: 0
