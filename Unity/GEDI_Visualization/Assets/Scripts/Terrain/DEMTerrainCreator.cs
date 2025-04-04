@@ -82,13 +82,14 @@ public class DEMTerrainCreator : MonoBehaviour
                 float v = z / (float)(verticesPerSide - 1);
 
                 // using the grid's normalized u,v as image coordinates.
-                float demValue = demSrc.GetPixelBilinear(u, v).r * Params.TerrainScale;
-                // Debug.Log(demValue);
-
-                vertices.Add(new Vector3(u, demValue, v));
 
                 float world_u = (u * (geoBounds.y - geoBounds.x) + geoBounds.x - textureBounds.x ) / (textureBounds.y - textureBounds.x);
                 float world_v = (v * (geoBounds.w - geoBounds.z) + geoBounds.z - textureBounds.z ) / (textureBounds.w - textureBounds.z);
+
+                float demValue = demSrc.GetPixelBilinear(world_u, world_v).r * Params.TerrainScale;
+                // Debug.Log(demValue);
+
+                vertices.Add(new Vector3(u, demValue, v));
                 uvs.Add(new Vector2(world_u, world_v));
             }
         }

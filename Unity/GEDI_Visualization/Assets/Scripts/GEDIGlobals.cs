@@ -7,8 +7,8 @@ namespace GEDIGlobals
 
     public class Params
     {
-        public const float SCALE = 0.02f;
-        public const float TerrainScale = 0.1f;
+        public const float SCALE = 0.01f;
+        public const float TerrainScale = 0.4f;
 
     }
 

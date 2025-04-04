@@ -467,7 +467,7 @@ MonoBehaviour:
   demTexture: {fileID: 2800000, guid: 78cf62978829249c69dd0665b480ab5f, type: 3}
   geoBounds: {x: -69, y: -68.5, z: -9, w: -8.5}
   textureBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
-  resolution: 256
+  resolution: 2000
   ToggleDemTerrain: {fileID: 198993749}
 --- !u!23 &327450251
 MeshRenderer:
