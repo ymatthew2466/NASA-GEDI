@@ -81,6 +81,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WireColor: {r: 0.627451, g: 1, b: 0.7777438, a: 1}
+    - _WireColor: {r: 0.62745106, g: 1, b: 0.77647066, a: 0.3882353}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

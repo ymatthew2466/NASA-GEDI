@@ -8,6 +8,9 @@
 
 # ignore .pkl in tracked dirs
 **/*.pkl
+**/*.tif
 
 # don't ignore gitignore
 !.gitignore
+Unity/GEDI_Visualization/Assets/Terrain/Textures/Bolivia-Saltflats_TandemX_30m.tif
+*.tif

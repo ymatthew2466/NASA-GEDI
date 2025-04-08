@@ -7,8 +7,12 @@ namespace GEDIGlobals
 
     public class Params
     {
-        public const float SCALE = 0.02f;
-        public const float TerrainScale = 0.1f;
+        public const float SCALE = 0.01f;
+        public const float TerrainScale = 0.01f;
+
+        // public Vector4 geoBounds = new Vector4(-71.5f, -71.4f, -46.6f, -46.5f);
+
+        // public Vector4 textureBounds = new Vector4(-71.5f, -71.4f, -46.6f, -46.5f);
 
     }
 
