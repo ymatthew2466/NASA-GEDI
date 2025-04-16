@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 45d09ea4c61aed440b7a87114d4b9233, type: 2}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1224,7 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaf0b2df0d2f4ce3a6b76688fbc4d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: Assets/Data/bolivia_clip_5.csv
+  filePath: Assets/Data/bolivia_lowest.csv
 --- !u!4 &1389572231
 Transform:
   m_ObjectHideFlags: 0
@@ -1796,7 +1796,7 @@ Transform:
   m_GameObject: {fileID: 2104034152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: 42, y: 360, z: 50}
+  m_LocalPosition: {x: 42, y: 50, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

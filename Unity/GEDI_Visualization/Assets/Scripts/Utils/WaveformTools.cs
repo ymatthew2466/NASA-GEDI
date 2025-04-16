@@ -53,8 +53,8 @@ public class WaveformTools
                 waveformValues[i] : 
                 waveformValues[waveformValues.Length - 1];
 
-            // radius = radius * Params.SCALE * 0.3f;
-            radius = (float)Math.Sqrt(radius+1e-5f) * Params.SCALE * 0.1f;
+            radius = radius * Params.SCALE * 0.3f;
+            // radius = (float)Math.Sqrt(radius+1e-5f) * Params.SCALE * 0.1f;
 
             // radius = Math.Clamp(radius, 0f, 120f * Params.SCALE);
             radius = Math.Clamp(radius, 0f, 12f * Params.SCALE);
