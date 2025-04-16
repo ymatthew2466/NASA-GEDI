@@ -45,14 +45,15 @@ def coordinate_picker():
             abs_y = int(round(event.ydata))
 
             # relative coords
-            rel_x = event.xdata / dem_data.shape[1]
-            rel_y = event.ydata / dem_data.shape[0]
+            rel_x = (event.xdata) / dem_data.shape[1]
+            rel_y = (event.ydata) / dem_data.shape[0]
 
             # geographic coords
             range_long = GEO_BOUNDS[1] - GEO_BOUNDS[0]
             range_lat = GEO_BOUNDS[3] - GEO_BOUNDS[2]
             long = rel_x * range_long + GEO_BOUNDS[0]
-            lat = rel_y * range_lat + GEO_BOUNDS[2]
+            lat = GEO_BOUNDS[3] - rel_y * range_lat
+
 
 
             if (abs_x < 0 or abs_x >= dem_data.shape[1] or abs_y < 0 or abs_y >= dem_data.shape[0]):
@@ -139,11 +140,11 @@ def matchGEDI(coords, dem_data):
         range_long = GEO_BOUNDS[1] - GEO_BOUNDS[0]
         range_lat = GEO_BOUNDS[3] - GEO_BOUNDS[2]
 
-        # convert GEDI to relative coordinates
+        # convert GEDI geo coordinates to relative coordinates
         rel_x = (closest_point['longitude'] - GEO_BOUNDS[0]) / range_long
-        rel_y = (closest_point['latitude'] - GEO_BOUNDS[2]) / range_lat
+        rel_y = (GEO_BOUNDS[3] - closest_point['latitude']) / range_lat
 
-        # convert to pixel coordinates
+        # convert relative to pixel coords
         pixel_x = int(round(rel_x * dem_data.shape[1]))
         pixel_y = int(round(rel_y * dem_data.shape[0]))
         pixel_x = max(0, min(pixel_x, dem_data.shape[1] - 1))
