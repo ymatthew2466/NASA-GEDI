@@ -4,23 +4,59 @@ import numpy as np
 import sys
 import warnings
 import random
+import yaml
+import os
+
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+CONFIG_FILE_PATH = './yamls/bolivia_saltflats.yaml'
+
+# ====== START YAML STUFF ======
+
+try:
+    with open(CONFIG_FILE_PATH, 'r') as f:
+        config = yaml.safe_load(f)
+except FileNotFoundError:
+    print(f"Error: Configuration file not found at {CONFIG_FILE_PATH}")
+    sys.exit(1)
+except yaml.YAMLError as e:
+    print(f"Error parsing configuration file {CONFIG_FILE_PATH}: {e}")
+    sys.exit(1)
+
 # prints PKL data and stops program
-DEBUG_MODE = False
+DEBUG_MODE = config.get('debug_mode', False)
 
-# path to PKL file
-PKL_FILE = '../pkls/Bolivia_saltflats.pkl'
+# input config
+input_config = config.get('input', {})
+PKL_FILE = input_config.get('pkl_file')
+if not PKL_FILE:
+    print("PKL file error")
+    sys.exit(1)
 
-# processing parameters
-ADAPTIVE_THRESHOLD = 0
-GEO_BOUNDS = [-67.8, -67.7, -20.5, -20.4]
-CLIP_METERS_ABOVE_RH98 = 5
+# processing config
+proc_config = config.get('processing', {})
+ADAPTIVE_THRESHOLD = proc_config.get('adaptive_threshold', 0)
+GEO_BOUNDS = proc_config.get('geo_bounds')
+if not GEO_BOUNDS or len(GEO_BOUNDS) != 4:
+     print("Geo bounds error")
+     sys.exit(1)
+CLIP_METERS_ABOVE_RH98 = proc_config.get('clip_meters_above_rh98', 5)
+APPLY_SQUARE_ROOT = proc_config.get('apply_square_root', False)
 
-# CSV output
-OUTPUT_PATH = '/Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Assets/Data/'
-OUTPUT_FILENAME = 'bolivia_lowest.csv'
+# output config
+output_config = config.get('output', {})
+OUTPUT_PATH = output_config.get('path')
+BASE_FILENAME = output_config.get('base_filename')
+if not OUTPUT_PATH or not BASE_FILENAME:
+    print("Output error")
+    sys.exit(1)
 
+# output filename
+OUTPUT_FILENAME = f'{BASE_FILENAME}.csv'
+FULL_OUTPUT_PATH = os.path.join(OUTPUT_PATH, OUTPUT_FILENAME)
+
+
+# ====== END YAML STUFF ======
 
 def adaptive_downsample(waveform, similarity_threshold=ADAPTIVE_THRESHOLD, min_segment_length=3):
     # returns tuple of (downsampled_values, segment_lengths, physical_positions)
@@ -120,7 +156,9 @@ for i in range(len(data['prop'])):
 
 
     # elevation = entry['geolocation/elevation_bin0']
-    elevation = entry['elev_lowestmode']
+    # elevation = entry['elev_lowestmode']
+
+    elevation = prop_rh['geolocation/digital_elevation_model']
     elevation_bin0 = entry['geolocation/elevation_bin0']
 
     if not area_filter(longitude, latitude):
@@ -148,9 +186,24 @@ for i in range(len(data['prop'])):
 
     # Adaptive downsampling of raw waveform
     raw_waveform = data['y'][i]
-    # normalize raw waveform here
     downsampled_values, segment_lengths, physical_positions = adaptive_downsample(raw_waveform)
 
+    # apply square root then normalize
+    if downsampled_values.size > 0:
+        # non negative
+        values_to_process = np.maximum(0, downsampled_values)
+
+        # apply square root
+        if APPLY_SQUARE_ROOT:
+            values_to_process = np.sqrt(values_to_process + 1e-6)
+
+        # NORMALIZE sqrt values
+        current_sum = np.sum(values_to_process)
+        normalized_values = values_to_process / current_sum
+        processed_values = normalized_values
+
+    # processed_values = downsampled_values
+    # clip spindles
     clip_height_above_ground = rh_98 + CLIP_METERS_ABOVE_RH98
     clip_elevation_threshold = elevation + clip_height_above_ground
 
@@ -160,12 +213,12 @@ for i in range(len(data['prop'])):
     clipped_lengths = []
     clipped_positions = []
 
-    if downsampled_values.size > 0:
-        for j in range(len(downsampled_values)):
+    if processed_values.size > 0:
+        for j in range(len(processed_values)):
             sample_elevation = elevation_bin0 - (physical_positions[j] * waveform_vertical_range)
 
             if sample_elevation <= clip_elevation_threshold:
-                clipped_values.append(downsampled_values[j])
+                clipped_values.append(processed_values[j])
                 clipped_lengths.append(segment_lengths[j])
                 clipped_positions.append(physical_positions[j])
 

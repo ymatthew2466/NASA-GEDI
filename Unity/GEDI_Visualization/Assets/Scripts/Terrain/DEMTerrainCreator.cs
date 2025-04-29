@@ -44,7 +44,8 @@ public class DEMTerrainCreator : MonoBehaviour
         referenceElevation = 50f;
 
         float height = (geoBounds.w - geoBounds.z) * 111000f * Params.SCALE;
-        float cosLat = Mathf.Cos(geoBounds.z * Mathf.Deg2Rad);
+        // float cosLat = Mathf.Cos(geoBounds.z * Mathf.Deg2Rad);
+        float cosLat = Mathf.Cos(referenceLatitude * Mathf.Deg2Rad);
         float width = (geoBounds.y - geoBounds.x) * 111000f * cosLat * Params.SCALE;
 
         terrainMaterial.mainTexture = demTexture;
@@ -55,10 +56,18 @@ public class DEMTerrainCreator : MonoBehaviour
 
         terrainDEM.transform.localScale = new Vector3(width, 1, height);
 
-        float translate_x = (geoBounds.x - referenceLongitude) * 111000f * Params.SCALE;
-        float translate_y = (0 - referenceElevation) * Params.TerrainScale;
-        float translate_z = (geoBounds.z - referenceLatitude) * 111000f * cosLat * Params.SCALE;
-        terrainDEM.transform.Translate(translate_x, translate_y, translate_z, Space.World);
+        // float translate_x = (geoBounds.x - referenceLongitude) * 111000f * Params.SCALE;
+        // float translate_y = (0 - referenceElevation) * Params.TerrainScale;
+        // float translate_z = (geoBounds.z - referenceLatitude) * 111000f * cosLat * Params.SCALE;
+        // terrainDEM.transform.Translate(translate_x, translate_y, translate_z, Space.World);
+
+        // Align with same degree→meter conversion for both axes
+        float translateX = (geoBounds.x - referenceLongitude) * 111000f * cosLat * Params.SCALE; // lon shift
+        float translateY = -referenceElevation * Params.TerrainScale;
+        float translateZ = (geoBounds.z - referenceLatitude) * 111000f * Params.SCALE;            // lat shift
+        terrainDEM.transform.Translate(translateX, translateY, translateZ, Space.World);
+
+
 
         showDemTerrain = true;
         ToggleTerrain();

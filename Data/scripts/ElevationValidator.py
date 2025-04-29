@@ -1,6 +1,7 @@
 import pickle
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import matplotlib.ticker as mticker
 import numpy as np
 import rasterio
 import warnings
@@ -10,9 +11,13 @@ warnings.filterwarnings('ignore', category=DeprecationWarning)
 
 
 # complete bounds for texture
-GEO_BOUNDS = [-68.75, -66.5, -20.95, -19.05]
-IMAGE_PATH = '/Users/matthewyoon/Documents/cs2370/GEDI/Data/terrainFiles/Bolivia-Saltflats_TandemX_30m.tif'
-PKL_FILE = '../pkls/Bolivia_saltflats.pkl'
+GEO_BOUNDS = [-68.75, -66.5, -20.95, -19.05]  # salt flats
+# GEO_BOUNDS = [-70, -68, -9.75, -7.75]  # mapia
+# TIF_PATH = '../tifs/Mapiá-Inauini_TandemX_30m.tif'
+TIF_PATH = '../tifs/Bolivia-Saltflats_TandemX_30m.tif'
+
+PKL_PATH = '../pkls/Bolivia_saltflats.pkl'
+# PKL_PATH = '../pkls/SA_174.pkl'
 
 
 def area_filter(lng, lat):
@@ -23,7 +28,7 @@ def area_filter(lng, lat):
 # returns list of relative coords
 def coordinate_picker():
 
-    with rasterio.open(IMAGE_PATH) as src:
+    with rasterio.open(TIF_PATH) as src:
         dem_data = src.read(1)  # read first band (elevation data)
     
     # create figure and display im
@@ -80,13 +85,35 @@ def coordinate_picker():
     fig.canvas.mpl_connect('key_press_event', onkey)
     
     plt.show()
+
+    # temp loop for hardcoded
+    # for i in range(10):
+    #     for j in range(10):
+    #         # relative coords
+    #         rel_x = 0.1*i+0.01
+    #         rel_y = 0.1*j+0.01
+
+    #         # geographic coords
+    #         range_long = GEO_BOUNDS[1] - GEO_BOUNDS[0]
+    #         range_lat = GEO_BOUNDS[3] - GEO_BOUNDS[2]
+    #         long = rel_x * range_long + GEO_BOUNDS[0]
+    #         lat = GEO_BOUNDS[3] - rel_y * range_lat
+
+    #         abs_x = (int)(rel_x * dem_data.shape[1])
+    #         abs_y = (int)(rel_y * dem_data.shape[0])
+    #         elevation = dem_data[abs_y, abs_x]
+
+    #         coordinates.append((long, lat, elevation))
+
+
+
     
     return coordinates, dem_data
     
 
 # prints elevation difference of closest GEDI point
 def matchGEDI(coords, dem_data):
-    with open(PKL_FILE, 'rb') as f:
+    with open(PKL_PATH, 'rb') as f:
         data = pickle.load(f)
     
     # track best matches for each coord
@@ -101,14 +128,15 @@ def matchGEDI(coords, dem_data):
         
         latitude = prop_rh['lat_lowestmode']
         longitude = prop_rh['lon_lowestmode']
-        elevation = entry['elev_lowestmode']
+        # elevation = entry['elev_lowestmode']
+        elevation = prop_rh['geolocation/digital_elevation_model']
         
         if not area_filter(longitude, latitude):
             continue
         
         # check against each clicked coordinate
         for j, user_coord in enumerate(coords):
-            user_long, user_lat, user_elev = user_coord
+            user_long, user_lat, _ = user_coord
             
             # euclidean dist
             dist = np.sqrt((longitude - user_long)**2 + (latitude - user_lat)**2)
@@ -128,13 +156,15 @@ def matchGEDI(coords, dem_data):
     gedi_elevations = []
     tif_elevations = []
     elevation_diffs = []
+    gedi_longitudes = [] 
+    gedi_latitudes = []
     
     # results for each clicked point
     for j, user_coord in enumerate(coords):
-        user_long, user_lat, user_elev = user_coord
+        user_long, user_lat, _ = user_coord
         closest_point = closest_points[j]
         
-        print(f"Processing TIF point {j+1}: ({user_long:.6f}, {user_lat:.6f}), elevation: {user_elev:.2f}m")
+        print(f"Processing TIF point {j+1}:")
         
         # convert geo coords back to pixel coords
         range_long = GEO_BOUNDS[1] - GEO_BOUNDS[0]
@@ -157,6 +187,8 @@ def matchGEDI(coords, dem_data):
         gedi_elevations.append(closest_point['elevation'])
         tif_elevations.append(tif_elevation_at_gedi)
         elevation_diffs.append(elevation_diff)
+        gedi_longitudes.append(closest_point['longitude'])
+        gedi_latitudes.append(closest_point['latitude'])
 
         print(f"\tGEDI Point: \t\t\t({closest_point['longitude']:.6f}, {closest_point['latitude']:.6f})")
         print(f"\tGEDI Elevation: \t\t{closest_point['elevation']:.2f}m")
@@ -169,10 +201,21 @@ def matchGEDI(coords, dem_data):
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
         
         # histogram of elev diffs
-        ax1.hist(elevation_diffs, bins=min(10, len(elevation_diffs)), alpha=0.7, color='skyblue')
+        counts, _, _ = ax1.hist(elevation_diffs, bins=min(10, len(elevation_diffs)+1), alpha=0.7, color='skyblue', edgecolor='black')
+        # ax1.hist(elevation_diffs, bins=min(10, len(elevation_diffs)), alpha=0.7, color='skyblue')
         ax1.set_title('Histogram of Elevation Differences')
         ax1.set_xlabel('TIF - GEDI Elevation (m)')
-        ax1.set_ylabel('Frequency')
+        ax1.set_ylabel('Number of GEDI Footprints')
+
+        # add padding to y-axis histogram
+        if counts.size > 0:
+            max_count = np.max(counts)
+            ax1.set_ylim(0, max_count + 1)
+        else:
+            ax1.set_ylim(0, 1) 
+
+        ax1.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))
+
                 
         # scatter plot of GEDI vs TIF elevations
         ax2.scatter(gedi_elevations, tif_elevations, alpha=0.7)
@@ -190,8 +233,59 @@ def matchGEDI(coords, dem_data):
         plt.tight_layout()
         plt.show()
 
+        # color map to show the dem differences
+        if len(elevation_diffs) > 0:
+            fig_scatter, ax_scatter = plt.subplots(figsize=(8, 7))
+
+            # color points by elev diff
+            scatter_map = ax_scatter.scatter(
+                gedi_longitudes,
+                gedi_latitudes,
+                c=elevation_diffs,
+                cmap='coolwarm', 
+                s=100,  # marker size
+                alpha=0.7
+            )
+
+            # color bar
+            cbar = fig_scatter.colorbar(scatter_map, ax=ax_scatter)
+            cbar.set_label('TIF - GEDI Elevation (m)')
+
+            ax_scatter.set_xlabel('Longitude (degrees)')
+            ax_scatter.set_ylabel('Latitude (degrees)')
+            ax_scatter.set_title('Spatial Distribution of Elevation Differences')
+            ax_scatter.grid(True, linestyle='--', alpha=0.5)
+
+            ax_scatter.set_aspect('auto')
+
+            plt.tight_layout()
+            plt.show()
+
 
     
+# if __name__ == "__main__":
+#     coords, dem_data = coordinate_picker()
+#     matchGEDI(coords, dem_data)
+
+
 if __name__ == "__main__":
-    coords, dem_data = coordinate_picker()
+    # Load DEM data
+    with rasterio.open(TIF_PATH) as src:
+        dem_data = src.read(1)
+
+    # Load all GEDI waveforms
+    with open(PKL_PATH, 'rb') as f:
+        data = pickle.load(f)
+
+    # Filter GEDI points within bounds
+    coords = []
+    for i in range(len(data['prop_rh'])):
+        prop = data['prop_rh'][i]
+        lon = prop['lon_lowestmode']
+        lat = prop['lat_lowestmode']
+        elev = prop['geolocation/digital_elevation_model']
+        if area_filter(lon, lat):
+            coords.append((lon, lat, elev))
+
+    # Compare and visualize
     matchGEDI(coords, dem_data)
