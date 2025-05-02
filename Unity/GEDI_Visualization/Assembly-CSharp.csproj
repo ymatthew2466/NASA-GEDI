@@ -68,6 +68,7 @@
     <Compile Include="Assets\Triangle\Voronoi\DefaultVoronoiFactory.cs" />
     <Compile Include="Assets\Triangle\Smoothing\VoronoiFactory.cs" />
     <Compile Include="Assets\Triangle\Meshing\QualityMesher.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\CustomSceneManager\DynamicSceneManagerHelper.cs" />
     <Compile Include="Assets\Triangle.Rendering\Buffer\IndexBuffer.cs" />
     <Compile Include="Assets\Triangle.Rendering\Buffer\VertexBuffer.cs" />
     <Compile Include="Assets\Triangle\Geometry\ITriangle.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Triangle.Rendering\RenderLayer.cs" />
     <Compile Include="Assets\Triangle\Tools\TriangleQuadTree.cs" />
     <Compile Include="Assets\Triangle\Topology\Triangle.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\CustomSceneManager\DynamicSceneManager.cs" />
     <Compile Include="Assets\Triangle.Rendering\Projection.cs" />
     <Compile Include="Assets\Triangle.Rendering\IRenderer.cs" />
     <Compile Include="Assets\Triangle\Configuration.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Assets\Triangle.Rendering\Text\SvgImage.cs" />
     <Compile Include="Assets\Scripts\OldWaveformViz.cs" />
     <Compile Include="Assets\Triangle\Voronoi\Legacy\IVoronoi.cs" />
+    <Compile Include="Assets\Scripts\Controls\MetaController.cs" />
     <Compile Include="Assets\Triangle\Voronoi\IVoronoiFactory.cs" />
     <Compile Include="Assets\Triangle\Tools\PolygonValidator.cs" />
     <Compile Include="Assets\Triangle\Meshing\Iterators\EdgeIterator.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Assets\Triangle\Meshing\Converter.cs" />
     <Compile Include="Assets\Triangle.Rendering\Buffer\ColorBuffer.cs" />
     <Compile Include="Assets\Triangle.Rendering\Buffer\BufferBase.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\SceneModelLoader.cs" />
     <Compile Include="Assets\Triangle\Tools\QualityMeasure.cs" />
     <Compile Include="Assets\Triangle\Meshing\Iterators\VertexCirculator.cs" />
     <Compile Include="Assets\Triangle\Meshing\ConstraintOptions.cs" />
@@ -129,6 +133,8 @@
     <Compile Include="Assets\Scripts\CSVParser.cs" />
     <Compile Include="Assets\Triangle\IO\TriangleReader.cs" />
     <Compile Include="Assets\Triangle\IO\MfemMesh.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Tracking Origin Sample\TrackingOriginSample.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\CustomSceneManager\SnapshotSceneManager.cs" />
     <Compile Include="Assets\Triangle\Meshing\IQualityMesher.cs" />
     <Compile Include="Assets\Triangle\Voronoi\Legacy\BoundedVoronoiLegacy.cs" />
     <Compile Include="Assets\Triangle.Rendering\Util\ReflectionHelper.cs" />
@@ -160,6 +166,7 @@
     <Compile Include="Assets\Triangle.Rendering\RenderManager.cs" />
     <Compile Include="Assets\Triangle\Topology\Osub.cs" />
     <Compile Include="Assets\Triangle.Rendering\IRenderContext.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\CustomSceneManager\SceneManagerHelper.cs" />
     <Compile Include="Assets\Triangle\Meshing\Algorithm\Dwyer.cs" />
     <Compile Include="Assets\Triangle.Rendering\IRenderLayer.cs" />
     <Compile Include="Assets\Triangle\IPredicates.cs" />
@@ -172,7 +179,9 @@
     <Compile Include="Assets\Triangle.Rendering\IRenderControl.cs" />
     <Compile Include="Assets\Triangle\TriangleLocator.cs" />
     <Compile Include="Assets\Triangle\RobustPredicates.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\CustomSceneManager\PrefabSceneManager.cs" />
     <Compile Include="Assets\Triangle\Geometry\Edge.cs" />
+    <Compile Include="Assets\Samples\Meta XR Core SDK\76.0.0\Mixed Reality Sample\Scripts\CustomSceneManager\BasicSceneManager.cs" />
     <Compile Include="Assets\Triangle\Tools\Statistic.cs" />
     <Compile Include="Assets\Triangle\Meshing\Algorithm\Incremental.cs" />
     <Compile Include="Assets\Triangle\Voronoi\Legacy\SimpleVoronoi.cs" />
@@ -686,6 +695,14 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.23f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
       <Private>False</Private>
@@ -1186,48 +1203,16 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.BuildingBlocks.DepthAPI.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.BuildingBlocks.DepthAPI">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.BuildingBlocks.DepthAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.MetaOpenXR.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.MetaOpenXR.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Meta.XR.EnvironmentDepth">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.EnvironmentDepth.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Meta.XR.MultiplayerBlocks.Fusion.Editor">
       <HintPath>Library\ScriptAssemblies\Meta.XR.MultiplayerBlocks.Fusion.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.CoreUtils">
       <HintPath>Library\ScriptAssemblies\Unity.XR.CoreUtils.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Oculus.Interaction.OVR">
       <HintPath>Library\ScriptAssemblies\Oculus.Interaction.OVR.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.OculusQuestSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.ARFoundation.VisualScripting.Editor">
@@ -1238,20 +1223,8 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.MultiplayerBlocks.Shared.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Oculus.VR.Editor">
-      <HintPath>Library\ScriptAssemblies\Oculus.VR.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Oculus.Interaction.UnityXR">
       <HintPath>Library\ScriptAssemblies\Oculus.Interaction.UnityXR.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Oculus.VR">
-      <HintPath>Library\ScriptAssemblies\Oculus.VR.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.ARFoundation.InternalUtils.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.InternalUtils.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.Simulation.Editor">
@@ -1266,32 +1239,24 @@
       <HintPath>Library\ScriptAssemblies\Oculus.Interaction.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    <Reference Include="Meta.XR.Editor.Id">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Id.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.Editor.StatusMenu">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.StatusMenu.dll</HintPath>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Meta.XR.Editor.Id">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Id.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Editor">
@@ -1302,14 +1267,6 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Notifications.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.Editor.Guide.About">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Guide.About.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1318,20 +1275,8 @@
       <HintPath>Library\ScriptAssemblies\Oculus.VR.Scripts.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.Editor.Callbacks">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Callbacks.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.ARFoundation">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Oculus.Interaction.Editor">
-      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Editor.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.ARFoundation.InternalUtils">
@@ -1342,8 +1287,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.XR.ARSubsystems">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.ARSubsystems.dll</HintPath>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Meta.XR.Editor.UPST.Notifications">
@@ -1354,40 +1299,32 @@
       <HintPath>Library\ScriptAssemblies\Oculus.Interaction.OVR.Samples.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.EnvironmentDepth.Editor">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.EnvironmentDepth.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.Management.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.Management.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.ARFoundation.VisualScripting">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.VisualScripting.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Oculus.Interaction.Samples">
-      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Samples.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.OpenXR.Features.RuntimeDebugger.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Meta.XR.Editor.TelemetryUI">
       <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.TelemetryUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Meta.XR.ImmersiveDebugger.Interface">
       <HintPath>Library\ScriptAssemblies\Meta.XR.ImmersiveDebugger.Interface.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
@@ -1402,40 +1339,12 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.MultiplayerBlocks.NGO.Editor">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.MultiplayerBlocks.NGO.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Multiplayer.Center.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Meta.XR.BuildingBlocks.Editor">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.BuildingBlocks.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NewAssembly">
-      <HintPath>Library\ScriptAssemblies\NewAssembly.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Meta.XR.Editor.Tags">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Tags.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Meta.XR.Editor.PlayCompanion">
       <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.PlayCompanion.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Oculus.Interaction.Samples.Editor">
-      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Samples.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    <Reference Include="Meta.XR.Editor.Tags">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Tags.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Meta.XR.Editor.ToolingSupport">
@@ -1454,14 +1363,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.XR.ARSubsystems.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.XR.ARAnalytics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.ARAnalytics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1470,36 +1371,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.XR.OpenXR.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.MetaOpenXR">
       <HintPath>Library\ScriptAssemblies\Unity.XR.MetaOpenXR.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.XR.Editor.UserInterface">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.UserInterface.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.ARFoundation.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Meta.XR.Editor.Reflection">
-      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Reflection.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
@@ -1518,10 +1399,6 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Settings.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.MetaQuestSupport.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1538,16 +1415,12 @@
       <HintPath>Library\ScriptAssemblies\Oculus.Interaction.OVR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Meta.XR.ImmersiveDebugger">
       <HintPath>Library\ScriptAssemblies\Meta.XR.ImmersiveDebugger.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Oculus.Interaction.Editor.UnityXR">
-      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Editor.UnityXR.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
@@ -1570,12 +1443,241 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.MultiplayerBlocks.Shared.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.BuildingBlocks.DepthAPI">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.BuildingBlocks.DepthAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.MetaOpenXR.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.MetaOpenXR.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.EnvironmentDepth">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.EnvironmentDepth.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.OculusQuestSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.ARFoundation.InternalUtils.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.InternalUtils.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Oculus.VR.Editor">
+      <HintPath>Library\ScriptAssemblies\Oculus.VR.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Oculus.VR">
+      <HintPath>Library\ScriptAssemblies\Oculus.VR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.Editor.StatusMenu">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.StatusMenu.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.Editor.Guide.About">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Guide.About.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.Editor.Callbacks">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Callbacks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.ARFoundation">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.ARSubsystems">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.ARSubsystems.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.EnvironmentDepth.Editor">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.EnvironmentDepth.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.Management.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.Management.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.ARFoundation.VisualScripting">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.VisualScripting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Oculus.Interaction.Samples">
+      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Samples.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.RuntimeDebugger.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Oculus.Interaction.Samples.Editor">
+      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Samples.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.MultiplayerBlocks.NGO.Editor">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.MultiplayerBlocks.NGO.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Center.Common">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.BuildingBlocks.Editor">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.BuildingBlocks.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NewAssembly">
+      <HintPath>Library\ScriptAssemblies\NewAssembly.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.ARAnalytics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.ARAnalytics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.Editor.Reflection">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.XR.Editor.UserInterface">
+      <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.UserInterface.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.ARFoundation.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.ARFoundation.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Oculus.Interaction.Editor.UnityXR">
+      <HintPath>Library\ScriptAssemblies\Oculus.Interaction.Editor.UnityXR.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Oculus.Interaction.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

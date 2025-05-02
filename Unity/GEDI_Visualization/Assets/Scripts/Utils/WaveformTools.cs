@@ -54,7 +54,7 @@ public class WaveformTools
                 waveformValues[waveformValues.Length - 1];
 
             // radius = radius * Params.SCALE * 0.3f;
-            radius = radius * 30f;
+            radius = radius * 60f;
 
 
             // radius = Math.Clamp(radius, 0f, 120f * Params.SCALE);
