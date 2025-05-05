@@ -1,25 +1,25 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: C:/Brown/Research/VR/NASA-GEDI/Unity/GEDI_Visualization/Packages/manifest.json
+    m_FilePath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638818101730511065
+      ticks: 638818195760000000
     m_Hash: 4293496626
   m_LockFileStatus:
-    m_FilePath: C:/Brown/Research/VR/NASA-GEDI/Unity/GEDI_Visualization/Packages/packages-lock.json
+    m_FilePath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638818101941293789
+      ticks: 638818195760000000
     m_Hash: 1510789477
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: C:/Brown/Research/VR/NASA-GEDI/Unity/GEDI_Visualization/Packages
+m_ProjectPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Packages
 m_EditorVersion: 6000.0.23f1 (1c4764c07fb4)
 m_ResolvedPackages:
 - packageId: com.meta.xr.sdk.interaction.ovr@76.0.0
@@ -27,7 +27,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 76.0.0
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.meta.xr.sdk.interaction.ovr
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.meta.xr.sdk.interaction.ovr
   assetPath: Packages/com.meta.xr.sdk.interaction.ovr
   name: com.meta.xr.sdk.interaction.ovr
   displayName: "Meta XR Interaction \u200BSDK"
@@ -160,7 +160,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.5.2
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.collab-proxy
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.collab-proxy
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -253,12 +253,10 @@ m_ResolvedPackages:
     - 2.5.2
     - 2.6.0
     - 2.7.1
-    - 2.8.1
     compatible:
     - 2.5.2
     - 2.6.0
     - 2.7.1
-    - 2.8.1
     recommended: 2.5.2
     deprecated: []
   dependencies: []
@@ -323,7 +321,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.2
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.feature.development
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.feature.development
   assetPath: Packages/com.unity.feature.development
   name: com.unity.feature.development
   displayName: Engineering
@@ -424,7 +422,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.multiplayer.center
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.multiplayer.center
   assetPath: Packages/com.unity.multiplayer.center
   name: com.unity.multiplayer.center
   displayName: Multiplayer Center
@@ -440,12 +438,6 @@ m_ResolvedPackages:
   errors: []
   versions:
     all:
-    - 0.2.1
-    - 0.3.0
-    - 0.4.0
-    - 1.0.0-pre.1
-    - 1.0.0-pre.2
-    - 1.0.0-pre.3
     - 1.0.0
     compatible:
     - 1.0.0
@@ -514,7 +506,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.8.8
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.timeline
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.timeline
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -698,7 +690,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.ugui
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.ugui
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -790,7 +782,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.9.4
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.visualscripting
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.visualscripting
   assetPath: Packages/com.unity.visualscripting
   name: com.unity.visualscripting
   displayName: Visual Scripting
@@ -905,7 +897,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 6.0.3
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.xr.arfoundation
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.xr.arfoundation
   assetPath: Packages/com.unity.xr.arfoundation
   name: com.unity.xr.arfoundation
   displayName: AR Foundation
@@ -1037,7 +1029,6 @@ m_ResolvedPackages:
     - 5.1.4
     - 5.1.5
     - 5.1.6
-    - 5.2.0
     - 6.0.0-pre.3
     - 6.0.0-pre.4
     - 6.0.0-pre.5
@@ -1055,9 +1046,6 @@ m_ResolvedPackages:
     - 6.1.0-pre.4
     - 6.1.0-pre.5
     - 6.1.0
-    - 6.2.0-pre.1
-    - 6.2.0-pre.2
-    - 6.2.0-pre.3
     compatible:
     - 6.0.3
     - 6.0.4
@@ -1068,9 +1056,6 @@ m_ResolvedPackages:
     - 6.1.0-pre.4
     - 6.1.0-pre.5
     - 6.1.0
-    - 6.2.0-pre.1
-    - 6.2.0-pre.2
-    - 6.2.0-pre.3
     recommended: 6.0.5
     deprecated: []
   dependencies:
@@ -1194,7 +1179,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.1
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.xr.meta-openxr
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.xr.meta-openxr
   assetPath: Packages/com.unity.xr.meta-openxr
   name: com.unity.xr.meta-openxr
   displayName: Unity OpenXR Meta
@@ -1215,8 +1200,6 @@ m_ResolvedPackages:
     - 1.0.0
     - 1.0.1
     - 1.0.2
-    - 1.0.3
-    - 1.0.4
     - 2.0.0-pre.1
     - 2.0.0
     - 2.0.1
@@ -1240,6 +1223,20 @@ m_ResolvedPackages:
   resolvedDependencies:
   - name: com.unity.xr.openxr
     version: 1.12.1
+  - name: com.unity.xr.management
+    version: 4.5.0
+  - name: com.unity.modules.vr
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.modules.xr
+    version: 1.0.0
+  - name: com.unity.modules.subsystems
+    version: 1.0.0
+  - name: com.unity.xr.legacyinputhelpers
+    version: 2.1.11
   - name: com.unity.inputsystem
     version: 1.11.1
   - name: com.unity.modules.uielements
@@ -1248,24 +1245,10 @@ m_ResolvedPackages:
     version: 1.0.0
   - name: com.unity.modules.imgui
     version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
   - name: com.unity.modules.hierarchycore
     version: 1.0.0
   - name: com.unity.xr.core-utils
     version: 2.3.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  - name: com.unity.xr.management
-    version: 4.5.0
-  - name: com.unity.modules.vr
-    version: 1.0.0
-  - name: com.unity.xr.legacyinputhelpers
-    version: 2.1.11
   - name: com.unity.xr.arfoundation
     version: 6.0.3
   - name: com.unity.ugui
@@ -1349,7 +1332,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.12.1
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.xr.openxr
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.xr.openxr
   assetPath: Packages/com.unity.xr.openxr
   name: com.unity.xr.openxr
   displayName: OpenXR Plugin
@@ -1365,68 +1348,35 @@ m_ResolvedPackages:
   errors: []
   versions:
     all:
-    - 0.1.1-preview.1
-    - 0.1.2-preview.2
-    - 1.0.0-pre.1
-    - 1.0.2
-    - 1.0.3
-    - 1.1.1
-    - 1.2.0
-    - 1.2.2
-    - 1.2.3
-    - 1.2.8
-    - 1.3.0
-    - 1.3.1
-    - 1.4.0
-    - 1.4.1
-    - 1.4.2
-    - 1.5.0-exp.1
-    - 1.5.0
-    - 1.5.1
-    - 1.5.3
-    - 1.6.0
-    - 1.7.0
-    - 1.8.0
-    - 1.8.1
-    - 1.8.2
-    - 1.9.1
-    - 1.10.0
-    - 1.11.0-exp.1
-    - 1.11.0
-    - 1.11.1-exp.1
-    - 1.12.0-exp.1
-    - 1.12.0
     - 1.12.1
-    - 1.13.0
-    - 1.13.1
-    - 1.13.2
-    - 1.14.0
-    - 1.14.1
-    - 1.14.2
-    - 1.14.3
-    - 1.15.0-pre.1
     compatible:
     - 1.12.1
-    - 1.13.0
-    - 1.13.1
-    - 1.13.2
-    - 1.14.0
-    - 1.14.1
-    - 1.14.2
-    - 1.14.3
-    - 1.15.0-pre.1
     recommended: 1.12.1
     deprecated: []
   dependencies:
-  - name: com.unity.inputsystem
-    version: 1.6.3
-  - name: com.unity.xr.core-utils
-    version: 2.1.1
   - name: com.unity.xr.management
     version: 4.4.0
   - name: com.unity.xr.legacyinputhelpers
     version: 2.1.2
+  - name: com.unity.inputsystem
+    version: 1.6.3
+  - name: com.unity.xr.core-utils
+    version: 2.1.1
   resolvedDependencies:
+  - name: com.unity.xr.management
+    version: 4.5.0
+  - name: com.unity.modules.vr
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.modules.xr
+    version: 1.0.0
+  - name: com.unity.modules.subsystems
+    version: 1.0.0
+  - name: com.unity.xr.legacyinputhelpers
+    version: 2.1.11
   - name: com.unity.inputsystem
     version: 1.11.1
   - name: com.unity.modules.uielements
@@ -1435,24 +1385,10 @@ m_ResolvedPackages:
     version: 1.0.0
   - name: com.unity.modules.imgui
     version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
   - name: com.unity.modules.hierarchycore
     version: 1.0.0
   - name: com.unity.xr.core-utils
     version: 2.3.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  - name: com.unity.xr.management
-    version: 4.5.0
-  - name: com.unity.modules.vr
-    version: 1.0.0
-  - name: com.unity.xr.legacyinputhelpers
-    version: 2.1.11
   keywords:
   - openxr
   - xr
@@ -1468,9 +1404,9 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   entitlements:
-    licensingModel: 1
+    licensingModel: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 638621648414390000
+  datePublishedTicks: 0
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.xr.openxr@1.12/manual/index.html
   hasRepository: 1
   repository:
@@ -1504,7 +1440,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.accessibility
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.accessibility
   assetPath: Packages/com.unity.modules.accessibility
   name: com.unity.modules.accessibility
   displayName: Accessibility
@@ -1571,7 +1507,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.ai
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.ai
   assetPath: Packages/com.unity.modules.ai
   name: com.unity.modules.ai
   displayName: AI
@@ -1638,7 +1574,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.androidjni
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.androidjni
   assetPath: Packages/com.unity.modules.androidjni
   name: com.unity.modules.androidjni
   displayName: Android JNI
@@ -1704,7 +1640,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.animation
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.animation
   assetPath: Packages/com.unity.modules.animation
   name: com.unity.modules.animation
   displayName: Animation
@@ -1771,7 +1707,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.assetbundle
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.assetbundle
   assetPath: Packages/com.unity.modules.assetbundle
   name: com.unity.modules.assetbundle
   displayName: Asset Bundle
@@ -1838,7 +1774,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.audio
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.audio
   assetPath: Packages/com.unity.modules.audio
   name: com.unity.modules.audio
   displayName: Audio
@@ -1905,7 +1841,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.cloth
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.cloth
   assetPath: Packages/com.unity.modules.cloth
   name: com.unity.modules.cloth
   displayName: Cloth
@@ -1976,7 +1912,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.director
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.director
   assetPath: Packages/com.unity.modules.director
   name: com.unity.modules.director
   displayName: Director
@@ -2051,7 +1987,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.imageconversion
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.imageconversion
   assetPath: Packages/com.unity.modules.imageconversion
   name: com.unity.modules.imageconversion
   displayName: Image Conversion
@@ -2118,7 +2054,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.imgui
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.imgui
   assetPath: Packages/com.unity.modules.imgui
   name: com.unity.modules.imgui
   displayName: IMGUI
@@ -2185,7 +2121,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.jsonserialize
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.jsonserialize
   assetPath: Packages/com.unity.modules.jsonserialize
   name: com.unity.modules.jsonserialize
   displayName: JSONSerialize
@@ -2252,7 +2188,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.particlesystem
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.particlesystem
   assetPath: Packages/com.unity.modules.particlesystem
   name: com.unity.modules.particlesystem
   displayName: Particle System
@@ -2319,7 +2255,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.physics
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.physics
   assetPath: Packages/com.unity.modules.physics
   name: com.unity.modules.physics
   displayName: Physics
@@ -2386,7 +2322,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.physics2d
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.physics2d
   assetPath: Packages/com.unity.modules.physics2d
   name: com.unity.modules.physics2d
   displayName: Physics 2D
@@ -2453,7 +2389,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.screencapture
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.screencapture
   assetPath: Packages/com.unity.modules.screencapture
   name: com.unity.modules.screencapture
   displayName: Screen Capture
@@ -2524,7 +2460,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.terrain
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.terrain
   assetPath: Packages/com.unity.modules.terrain
   name: com.unity.modules.terrain
   displayName: Terrain
@@ -2591,7 +2527,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.terrainphysics
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.terrainphysics
   assetPath: Packages/com.unity.modules.terrainphysics
   name: com.unity.modules.terrainphysics
   displayName: Terrain Physics
@@ -2666,7 +2602,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.tilemap
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.tilemap
   assetPath: Packages/com.unity.modules.tilemap
   name: com.unity.modules.tilemap
   displayName: Tilemap
@@ -2736,7 +2672,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.ui
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.ui
   assetPath: Packages/com.unity.modules.ui
   name: com.unity.modules.ui
   displayName: UI
@@ -2803,7 +2739,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.uielements
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.uielements
   assetPath: Packages/com.unity.modules.uielements
   name: com.unity.modules.uielements
   displayName: UIElements
@@ -2886,7 +2822,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.umbra
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.umbra
   assetPath: Packages/com.unity.modules.umbra
   name: com.unity.modules.umbra
   displayName: Umbra
@@ -2953,7 +2889,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.unityanalytics
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.unityanalytics
   assetPath: Packages/com.unity.modules.unityanalytics
   name: com.unity.modules.unityanalytics
   displayName: Unity Analytics
@@ -3027,7 +2963,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.unitywebrequest
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.unitywebrequest
   assetPath: Packages/com.unity.modules.unitywebrequest
   name: com.unity.modules.unitywebrequest
   displayName: Unity Web Request
@@ -3094,7 +3030,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.unitywebrequestassetbundle
   assetPath: Packages/com.unity.modules.unitywebrequestassetbundle
   name: com.unity.modules.unitywebrequestassetbundle
   displayName: Unity Web Request Asset Bundle
@@ -3169,7 +3105,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.unitywebrequestaudio
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.unitywebrequestaudio
   assetPath: Packages/com.unity.modules.unitywebrequestaudio
   name: com.unity.modules.unitywebrequestaudio
   displayName: Unity Web Request Audio
@@ -3244,7 +3180,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.unitywebrequesttexture
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.unitywebrequesttexture
   assetPath: Packages/com.unity.modules.unitywebrequesttexture
   name: com.unity.modules.unitywebrequesttexture
   displayName: Unity Web Request Texture
@@ -3319,7 +3255,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.unitywebrequestwww
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.unitywebrequestwww
   assetPath: Packages/com.unity.modules.unitywebrequestwww
   name: com.unity.modules.unitywebrequestwww
   displayName: Unity Web Request WWW
@@ -3410,7 +3346,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.vehicles
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.vehicles
   assetPath: Packages/com.unity.modules.vehicles
   name: com.unity.modules.vehicles
   displayName: Vehicles
@@ -3481,7 +3417,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.video
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.video
   assetPath: Packages/com.unity.modules.video
   name: com.unity.modules.video
   displayName: Video
@@ -3560,7 +3496,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.vr
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.vr
   assetPath: Packages/com.unity.modules.vr
   name: com.unity.modules.vr
   displayName: VR
@@ -3641,7 +3577,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.wind
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.wind
   assetPath: Packages/com.unity.modules.wind
   name: com.unity.modules.wind
   displayName: Wind
@@ -3708,7 +3644,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.xr
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.xr
   assetPath: Packages/com.unity.modules.xr
   name: com.unity.modules.xr
   displayName: XR
@@ -3787,7 +3723,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.subsystems
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.subsystems
   assetPath: Packages/com.unity.modules.subsystems
   name: com.unity.modules.subsystems
   displayName: Subsystems
@@ -3858,7 +3794,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.modules.hierarchycore
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.modules.hierarchycore
   assetPath: Packages/com.unity.modules.hierarchycore
   name: com.unity.modules.hierarchycore
   displayName: Hierarchy Core
@@ -3920,12 +3856,284 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
+- packageId: com.unity.xr.management@4.5.0
+  testable: 0
+  isDirectDependency: 0
+  version: 4.5.0
+  source: 1
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.xr.management
+  assetPath: Packages/com.unity.xr.management
+  name: com.unity.xr.management
+  displayName: XR Plugin Management
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: assets
+  description: Package that provides simple management of XR plug-ins. Manages and
+    offers help with loading, initialization, settings, and build support for XR
+    plug-ins.
+  errors: []
+  versions:
+    all:
+    - 0.1.0-preview.8
+    - 0.1.0-preview.12
+    - 1.0.0-preview.2
+    - 2.0.0-preview.3
+    - 2.0.0-preview.6
+    - 2.0.0-preview.9
+    - 2.0.0-preview.10
+    - 2.0.0-preview.13
+    - 2.0.0-preview.21
+    - 2.0.0-preview.22
+    - 2.0.0-preview.24
+    - 2.0.0-preview.25
+    - 2.0.0-preview.26
+    - 3.0.1
+    - 3.0.2-preview.1
+    - 3.0.2-preview.2
+    - 3.0.3
+    - 3.0.4-preview.1
+    - 3.0.4-preview.3
+    - 3.0.4
+    - 3.0.5-preview.1
+    - 3.0.5
+    - 3.0.6-preview.2
+    - 3.0.6
+    - 3.1.0-preview.2
+    - 3.2.4
+    - 3.2.6
+    - 3.2.7
+    - 3.2.9
+    - 3.2.10
+    - 3.2.11-preview.1
+    - 3.2.12
+    - 3.2.13
+    - 3.2.15
+    - 3.2.16
+    - 3.2.17
+    - 4.0.0-exp.2
+    - 4.0.0-pre.2
+    - 4.0.0-pre.3
+    - 4.0.1
+    - 4.0.3
+    - 4.0.5
+    - 4.0.6
+    - 4.0.7
+    - 4.1.0-pre.1
+    - 4.1.0-pre.2
+    - 4.1.0
+    - 4.2.0
+    - 4.2.1
+    - 4.3.1
+    - 4.3.3
+    - 4.4.0
+    - 4.4.1
+    - 4.5.0
+    - 4.5.1
+    compatible:
+    - 4.5.0
+    - 4.5.1
+    recommended: 4.5.1
+    deprecated: []
+  dependencies:
+  - name: com.unity.modules.vr
+    version: 1.0.0
+  - name: com.unity.modules.xr
+    version: 1.0.0
+  - name: com.unity.modules.subsystems
+    version: 1.0.0
+  - name: com.unity.xr.legacyinputhelpers
+    version: 2.1.7
+  resolvedDependencies:
+  - name: com.unity.modules.vr
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.modules.xr
+    version: 1.0.0
+  - name: com.unity.modules.subsystems
+    version: 1.0.0
+  - name: com.unity.xr.legacyinputhelpers
+    version: 2.1.11
+  keywords:
+  - xr
+  - sdk
+  - ar
+  - vr
+  - management
+  - build
+  - plugin
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638560264920000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.xr.management@4.5/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/xr.sdk.management.git
+    revision: fa86b200cd8cd1b75a57534d44d41cc7b6b7f58d
+    path: 
+  unityLifecycle:
+    version: 4.5.0
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: '{"changelog":"### Fixed\n- Fixed compile errors on Unity versions
+    [2023.1.0f1 - 2023.2.6f1] caused by missing `BuildTargetGroup.VisionOS` enum
+    value.\n\n### Added\n- Added Android manifest support for applications that use
+    Game Activity entry point. Note that Game Activities are only supported in projects
+    made with Unity versions 2023.1 onwards."}'
+  assetStore:
+    productId: 
+  fingerprint: 3126858600e621b17ff9bfda920ebf34b9f2414c
+  editorCompatibility:
+    compatibilityLevel: 0
+    minimumPackageVersion: 4.5.0
+    minimumUnityVersion: 2020.3.15f1
+- packageId: com.unity.xr.legacyinputhelpers@2.1.11
+  testable: 0
+  isDirectDependency: 0
+  version: 2.1.11
+  source: 1
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.xr.legacyinputhelpers
+  assetPath: Packages/com.unity.xr.legacyinputhelpers
+  name: com.unity.xr.legacyinputhelpers
+  displayName: XR Legacy Input Helpers
+  author:
+    name: 
+    email: 
+    url: 
+  category: XR
+  type: 
+  description: This package includes the tracked pose driver for the legacy input
+    system, the XR Bindings Seeding Tool and 3Dof Arm Model support for the Tracked
+    Pose Driver. The Tracked Pose Driver is a behavior that enables GameObjects to
+    track input devices, the XR Bindings Seeding Tool adds a menu item under the
+    'Assets' menu which populates the Input Asset with Unity's crossplatform Input
+    Bindings
+  errors: []
+  versions:
+    all:
+    - 1.0.0
+    - 1.0.2
+    - 1.0.3
+    - 1.3.1
+    - 1.3.2
+    - 1.3.4
+    - 1.3.5
+    - 1.3.6
+    - 1.3.7
+    - 1.3.8
+    - 1.3.11
+    - 2.0.1
+    - 2.0.2
+    - 2.0.4
+    - 2.0.6
+    - 2.0.8
+    - 2.1.1
+    - 2.1.2
+    - 2.1.3
+    - 2.1.4
+    - 2.1.6
+    - 2.1.7
+    - 2.1.8
+    - 2.1.9
+    - 2.1.10
+    - 2.1.11
+    - 2.1.12
+    compatible:
+    - 2.1.11
+    - 2.1.12
+    recommended: 2.1.12
+    deprecated: []
+  dependencies:
+  - name: com.unity.modules.vr
+    version: 1.0.0
+  - name: com.unity.modules.xr
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.modules.vr
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.modules.xr
+    version: 1.0.0
+  - name: com.unity.modules.subsystems
+    version: 1.0.0
+  keywords:
+  - TPD
+  - Tracked Pose Driver
+  - XR
+  - Input
+  - Helpers
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638627703211970000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.xr.legacyinputhelpers@2.1/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.xr.legacyinputhelpers.git
+    revision: 43a3dc5e306cc961f9f0121a31ec3bd1285cf1a7
+    path: 
+  unityLifecycle:
+    version: 2.1.11
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: '{"changelog":"### Fixed\n- Removed an empty script file and corresponding
+    meta file."}'
+  assetStore:
+    productId: 
+  fingerprint: a3936666e06871a5fd0461a69a4d99efb31a21c1
+  editorCompatibility:
+    compatibilityLevel: 0
+    minimumPackageVersion: 2.1.11
+    minimumUnityVersion: 2019.4.0a1
 - packageId: com.unity.inputsystem@1.11.1
   testable: 0
   isDirectDependency: 0
   version: 1.11.1
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.inputsystem
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.inputsystem
   assetPath: Packages/com.unity.inputsystem
   name: com.unity.inputsystem
   displayName: Input System
@@ -4088,7 +4296,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.3.0
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.xr.core-utils
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.xr.core-utils
   assetPath: Packages/com.unity.xr.core-utils
   name: com.unity.xr.core-utils
   displayName: XR Core Utilities
@@ -4207,284 +4415,12 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 2.3.0
     minimumUnityVersion: 2019.4.0f1
-- packageId: com.unity.xr.management@4.5.0
-  testable: 0
-  isDirectDependency: 0
-  version: 4.5.0
-  source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.xr.management
-  assetPath: Packages/com.unity.xr.management
-  name: com.unity.xr.management
-  displayName: XR Plugin Management
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: assets
-  description: Package that provides simple management of XR plug-ins. Manages and
-    offers help with loading, initialization, settings, and build support for XR
-    plug-ins.
-  errors: []
-  versions:
-    all:
-    - 0.1.0-preview.8
-    - 0.1.0-preview.12
-    - 1.0.0-preview.2
-    - 2.0.0-preview.3
-    - 2.0.0-preview.6
-    - 2.0.0-preview.9
-    - 2.0.0-preview.10
-    - 2.0.0-preview.13
-    - 2.0.0-preview.21
-    - 2.0.0-preview.22
-    - 2.0.0-preview.24
-    - 2.0.0-preview.25
-    - 2.0.0-preview.26
-    - 3.0.1
-    - 3.0.2-preview.1
-    - 3.0.2-preview.2
-    - 3.0.3
-    - 3.0.4-preview.1
-    - 3.0.4-preview.3
-    - 3.0.4
-    - 3.0.5-preview.1
-    - 3.0.5
-    - 3.0.6-preview.2
-    - 3.0.6
-    - 3.1.0-preview.2
-    - 3.2.4
-    - 3.2.6
-    - 3.2.7
-    - 3.2.9
-    - 3.2.10
-    - 3.2.11-preview.1
-    - 3.2.12
-    - 3.2.13
-    - 3.2.15
-    - 3.2.16
-    - 3.2.17
-    - 4.0.0-exp.2
-    - 4.0.0-pre.2
-    - 4.0.0-pre.3
-    - 4.0.1
-    - 4.0.3
-    - 4.0.5
-    - 4.0.6
-    - 4.0.7
-    - 4.1.0-pre.1
-    - 4.1.0-pre.2
-    - 4.1.0
-    - 4.2.0
-    - 4.2.1
-    - 4.3.1
-    - 4.3.3
-    - 4.4.0
-    - 4.4.1
-    - 4.5.0
-    - 4.5.1
-    compatible:
-    - 4.5.0
-    - 4.5.1
-    recommended: 4.5.1
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.vr
-    version: 1.0.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  - name: com.unity.xr.legacyinputhelpers
-    version: 2.1.7
-  resolvedDependencies:
-  - name: com.unity.modules.vr
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  - name: com.unity.xr.legacyinputhelpers
-    version: 2.1.11
-  keywords:
-  - xr
-  - sdk
-  - ar
-  - vr
-  - management
-  - build
-  - plugin
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 638560264920000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.xr.management@4.5/manual/index.html
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/xr.sdk.management.git
-    revision: fa86b200cd8cd1b75a57534d44d41cc7b6b7f58d
-    path: 
-  unityLifecycle:
-    version: 4.5.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: '{"changelog":"### Fixed\n- Fixed compile errors on Unity versions
-    [2023.1.0f1 - 2023.2.6f1] caused by missing `BuildTargetGroup.VisionOS` enum
-    value.\n\n### Added\n- Added Android manifest support for applications that use
-    Game Activity entry point. Note that Game Activities are only supported in projects
-    made with Unity versions 2023.1 onwards."}'
-  assetStore:
-    productId: 
-  fingerprint: 3126858600e621b17ff9bfda920ebf34b9f2414c
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 4.5.0
-    minimumUnityVersion: 2020.3.15f1
-- packageId: com.unity.xr.legacyinputhelpers@2.1.11
-  testable: 0
-  isDirectDependency: 0
-  version: 2.1.11
-  source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.xr.legacyinputhelpers
-  assetPath: Packages/com.unity.xr.legacyinputhelpers
-  name: com.unity.xr.legacyinputhelpers
-  displayName: XR Legacy Input Helpers
-  author:
-    name: 
-    email: 
-    url: 
-  category: XR
-  type: 
-  description: This package includes the tracked pose driver for the legacy input
-    system, the XR Bindings Seeding Tool and 3Dof Arm Model support for the Tracked
-    Pose Driver. The Tracked Pose Driver is a behavior that enables GameObjects to
-    track input devices, the XR Bindings Seeding Tool adds a menu item under the
-    'Assets' menu which populates the Input Asset with Unity's crossplatform Input
-    Bindings
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    - 1.0.2
-    - 1.0.3
-    - 1.3.1
-    - 1.3.2
-    - 1.3.4
-    - 1.3.5
-    - 1.3.6
-    - 1.3.7
-    - 1.3.8
-    - 1.3.11
-    - 2.0.1
-    - 2.0.2
-    - 2.0.4
-    - 2.0.6
-    - 2.0.8
-    - 2.1.1
-    - 2.1.2
-    - 2.1.3
-    - 2.1.4
-    - 2.1.6
-    - 2.1.7
-    - 2.1.8
-    - 2.1.9
-    - 2.1.10
-    - 2.1.11
-    - 2.1.12
-    compatible:
-    - 2.1.11
-    - 2.1.12
-    recommended: 2.1.12
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.vr
-    version: 1.0.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.vr
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  keywords:
-  - TPD
-  - Tracked Pose Driver
-  - XR
-  - Input
-  - Helpers
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 638627703211970000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.xr.legacyinputhelpers@2.1/manual/index.html
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/com.unity.xr.legacyinputhelpers.git
-    revision: 43a3dc5e306cc961f9f0121a31ec3bd1285cf1a7
-    path: 
-  unityLifecycle:
-    version: 2.1.11
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: '{"changelog":"### Fixed\n- Removed an empty script file and corresponding
-    meta file."}'
-  assetStore:
-    productId: 
-  fingerprint: a3936666e06871a5fd0461a69a4d99efb31a21c1
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 2.1.11
-    minimumUnityVersion: 2019.4.0a1
 - packageId: com.unity.mathematics@1.3.2
   testable: 0
   isDirectDependency: 0
   version: 1.3.2
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.mathematics
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.mathematics
   assetPath: Packages/com.unity.mathematics
   name: com.unity.mathematics
   displayName: Mathematics
@@ -4573,7 +4509,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.0.0
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.editorcoroutines
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.editorcoroutines
   assetPath: Packages/com.unity.editorcoroutines
   name: com.unity.editorcoroutines
   displayName: Editor Coroutines
@@ -4650,7 +4586,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.22
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.ide.visualstudio
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.ide.visualstudio
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -4758,7 +4694,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 3.0.31
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.ide.rider
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.ide.rider
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -4881,7 +4817,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.2.2
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.performance.profile-analyzer
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.performance.profile-analyzer
   assetPath: Packages/com.unity.performance.profile-analyzer
   name: com.unity.performance.profile-analyzer
   displayName: Profile Analyzer
@@ -4967,7 +4903,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.4.5
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.test-framework
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.test-framework
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -5132,7 +5068,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 1.2.6
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.testtools.codecoverage
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.testtools.codecoverage
   assetPath: Packages/com.unity.testtools.codecoverage
   name: com.unity.testtools.codecoverage
   displayName: Code Coverage
@@ -5255,7 +5191,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 76.0.0
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.meta.xr.sdk.core
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.meta.xr.sdk.core
   assetPath: Packages/com.meta.xr.sdk.core
   name: com.meta.xr.sdk.core
   displayName: Meta XR Core SDK
@@ -5366,7 +5302,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 76.0.0
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.meta.xr.sdk.interaction
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.meta.xr.sdk.interaction
   assetPath: Packages/com.meta.xr.sdk.interaction
   name: com.meta.xr.sdk.interaction
   displayName: Meta XR Interaction SDK Essentials
@@ -5491,7 +5427,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.1
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.settings-manager
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.settings-manager
   assetPath: Packages/com.unity.settings-manager
   name: com.unity.settings-manager
   displayName: Settings Manager
@@ -5567,7 +5503,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.5
   source: 1
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.ext.nunit
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.ext.nunit
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit
@@ -5646,7 +5582,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 5.0.0
   source: 2
-  resolvedPath: C:\Brown\Research\VR\NASA-GEDI\Unity\GEDI_Visualization\Library\PackageCache\com.unity.textmeshpro
+  resolvedPath: /Users/matthewyoon/Documents/cs2370/GEDI/Unity/GEDI_Visualization/Library/PackageCache/com.unity.textmeshpro
   assetPath: Packages/com.unity.textmeshpro
   name: com.unity.textmeshpro
   displayName: TextMeshPro
@@ -5662,103 +5598,6 @@ m_ResolvedPackages:
   errors: []
   versions:
     all:
-    - 0.1.2
-    - 1.0.21
-    - 1.0.23
-    - 1.0.25
-    - 1.0.26
-    - 1.1.0
-    - 1.2.0
-    - 1.2.1
-    - 1.2.2
-    - 1.2.3
-    - 1.2.4
-    - 1.3.0-preview
-    - 1.3.0
-    - 1.4.0-preview.1b
-    - 1.4.0-preview.2a
-    - 1.4.0-preview.3a
-    - 1.4.0
-    - 1.4.1-preview.1
-    - 1.4.1
-    - 1.5.0-preview.1
-    - 1.5.0-preview.2
-    - 1.5.0-preview.3
-    - 1.5.0-preview.4
-    - 1.5.0-preview.5
-    - 1.5.0-preview.6
-    - 1.5.0-preview.7
-    - 1.5.0-preview.8
-    - 1.5.0-preview.10
-    - 1.5.0-preview.11
-    - 1.5.0-preview.12
-    - 1.5.0-preview.13
-    - 1.5.0-preview.14
-    - 1.5.0
-    - 1.5.1
-    - 1.5.3
-    - 1.5.4
-    - 1.5.5
-    - 1.5.6
-    - 1.6.0-preview.1
-    - 2.0.0
-    - 2.0.1-preview.1
-    - 2.0.1
-    - 2.1.0-preview.1
-    - 2.1.0-preview.2
-    - 2.1.0-preview.3
-    - 2.1.0-preview.4
-    - 2.1.0-preview.5
-    - 2.1.0-preview.7
-    - 2.1.0-preview.8
-    - 2.1.0-preview.10
-    - 2.1.0-preview.11
-    - 2.1.0-preview.12
-    - 2.1.0-preview.13
-    - 2.1.0-preview.14
-    - 2.1.0
-    - 2.1.1
-    - 2.1.3
-    - 2.1.4
-    - 2.1.5
-    - 2.1.6
-    - 2.2.0-preview.1
-    - 2.2.0-preview.2
-    - 2.2.0-preview.3
-    - 3.0.0-preview.1
-    - 3.0.0-preview.3
-    - 3.0.0-preview.4
-    - 3.0.0-preview.5
-    - 3.0.0-preview.7
-    - 3.0.0-preview.8
-    - 3.0.0-preview.10
-    - 3.0.0-preview.11
-    - 3.0.0-preview.12
-    - 3.0.0-preview.13
-    - 3.0.0-preview.14
-    - 3.0.0
-    - 3.0.1
-    - 3.0.3
-    - 3.0.4
-    - 3.0.5
-    - 3.0.6
-    - 3.0.7
-    - 3.0.8
-    - 3.0.9
-    - 3.2.0-pre.1
-    - 3.2.0-pre.2
-    - 3.2.0-pre.3
-    - 3.2.0-pre.4
-    - 3.2.0-pre.5
-    - 3.2.0-pre.6
-    - 3.2.0-pre.7
-    - 3.2.0-pre.8
-    - 3.2.0-pre.9
-    - 3.2.0-pre.10
-    - 3.2.0-pre.11
-    - 3.2.0-pre.12
-    - 4.0.0-pre.1
-    - 4.0.0-pre.2
     - 5.0.0
     compatible: []
     recommended: 

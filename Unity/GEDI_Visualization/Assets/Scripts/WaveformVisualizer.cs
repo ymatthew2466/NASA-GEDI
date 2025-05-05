@@ -34,6 +34,14 @@ public class WaveformVisualizer : MonoBehaviour
     //// handles the wireframe mode of GEDI terrain
     public Button WireframeToggleGEDITerrain;
     private GameObject terrainGEDI;
+
+    private int gediTerrainDisplayState = 0; // 0 = Solid, 1 = Wireframe, 2 = Off
+    private const int GEDI_STATE_SOLID = 0;
+    private const int GEDI_STATE_WIREFRAME = 1;
+    private const int GEDI_STATE_OFF = 2;
+    private const int GEDI_NUM_STATES = 3; // Total number of states
+
+
     private bool enableWireframeGEDI = false; // Whether to render terrain as wireframe
     private Mesh terrainWireframeGEDI;
     private Mesh terrainSolidGEDI;
@@ -251,26 +259,46 @@ public class WaveformVisualizer : MonoBehaviour
         WireframeToggleGEDITerrain.onClick.AddListener(ToggleWireframeGEDI);
     }
 
-    
     void ToggleWireframeGEDI()
     {
-        enableWireframeGEDI = !enableWireframeGEDI;
+        // Cycle through states: 0 -> 1 -> 2 -> 0
+        gediTerrainDisplayState = (gediTerrainDisplayState + 1) % GEDI_NUM_STATES;
+
+        if (terrainGEDI == null) return; 
+
         MeshFilter meshFilter = terrainGEDI.GetComponent<MeshFilter>();
         MeshRenderer meshRenderer = terrainGEDI.GetComponent<MeshRenderer>();
+        Text buttonText = WireframeToggleGEDITerrain.GetComponentInChildren<Text>();
 
-        if (enableWireframeGEDI)
+        if (meshFilter == null || meshRenderer == null || buttonText == null)
         {
-            WireframeToggleGEDITerrain.GetComponentInChildren<Text>().text = "GEDI Terrain (Wireframe)";
-            meshFilter.mesh = terrainWireframeGEDI;
-            meshRenderer.material = wireframeMaterial;
+            Debug.LogError("Missing components on terrainGEDI or Button Text.");
+            return;
         }
-        else
+
+        switch (gediTerrainDisplayState)
         {
-            WireframeToggleGEDITerrain.GetComponentInChildren<Text>().text = "GEDI Terrain (Solid)";
-            meshFilter.mesh = terrainSolidGEDI;
-            meshRenderer.material = terrainMaterial;
+            case GEDI_STATE_SOLID: // State 0: Solid
+                buttonText.text = "GEDI Terrain (Solid)";
+                meshFilter.mesh = terrainSolidGEDI;
+                meshRenderer.material = terrainMaterial;
+                terrainGEDI.SetActive(true); // Gameobject active
+                break;
+
+            case GEDI_STATE_WIREFRAME: // State 1: Wireframe
+                buttonText.text = "GEDI Terrain (Wireframe)";
+                meshFilter.mesh = terrainWireframeGEDI;
+                meshRenderer.material = wireframeMaterial;
+                terrainGEDI.SetActive(true); // Gameobject active
+                break;
+
+            case GEDI_STATE_OFF: // State 2: Off
+                buttonText.text = "GEDI Terrain (Off)";
+                terrainGEDI.SetActive(false); // Hide GameObject
+                break;
         }
     }
+    
 
 
 }

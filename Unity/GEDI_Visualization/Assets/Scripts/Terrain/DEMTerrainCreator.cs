@@ -138,10 +138,10 @@ public class DEMTerrainCreator : MonoBehaviour
         terrainDEM.SetActive(showDemTerrain);
 
         if (showDemTerrain){
-            ToggleDemTerrain.GetComponentInChildren<Text>().text = "Terrain-X (on)";
+            ToggleDemTerrain.GetComponentInChildren<Text>().text = "Terrain-X (On)";
         }
         else{
-            ToggleDemTerrain.GetComponentInChildren<Text>().text = "Terrain-X (off)";
+            ToggleDemTerrain.GetComponentInChildren<Text>().text = "Terrain-X (Off)";
         }
             
     }
