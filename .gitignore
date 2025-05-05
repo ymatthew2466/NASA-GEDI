@@ -14,3 +14,6 @@
 !.gitignore
 Unity/GEDI_Visualization/Assets/Terrain/Textures/Bolivia-Saltflats_TandemX_30m.tif
 *.tif
+Unity/GEDI_Visualization/Assets/StreamingAssets/mapia_full.csv
+Unity/GEDI_Visualization/Assets/StreamingAssets/mapia_full.csv.meta
+Unity/GEDI_Visualization/Assets/Data/mapia_full.csv

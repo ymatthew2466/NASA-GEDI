@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
+using UnityEngine.Networking;
+using System;
 
 public class CSVParser : MonoBehaviour {
     public string filePath = "Assets/Data/gedi_dataframe.csv"; 
@@ -76,59 +78,85 @@ public class CSVParser : MonoBehaviour {
             }
         }
     }
+    IEnumerator LoadLines(string filePath, Action<string[]> callback)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, filePath);
 
-    public void loadCSV()
+        UnityWebRequest uwr = UnityWebRequest.Get(path);
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("Error loading file: " + uwr.error);
+            callback(null);
+        }
+        else
+        {
+            string[] lines = uwr.downloadHandler.text.Split('\n');
+            callback(lines);
+        }
+    }
+
+    public IEnumerator loadCSV()
     {
         this.dataPoints = new List<GEDIDataPoint>();
-        string[] dataLines = File.ReadAllLines(filePath);
-
-        for (int i = 1; i < dataLines.Length; i++)
+        string dataPath = Path.Combine(Application.streamingAssetsPath, filePath);
+        StartCoroutine(LoadLines(filePath, dataLines =>
         {
-            string line = dataLines[i];
-            List<string> fields = ParseCSVLine(line);
-
-            if (fields.Count < 16) 
+            Debug.Log(dataLines.Length);
+            for (int i = 1; i < dataLines.Length; i++)
             {
-                Debug.LogError($"Incorrect number of fields in line {i}: {line}");
-                continue;
-            }
+                string line = dataLines[i];
+                List<string> fields = ParseCSVLine(line);
 
-            try {
-                // Parse the fields
-                float latitude = float.Parse(fields[0]);
-                float longitude = float.Parse(fields[1]);
-                float elevation = float.Parse(fields[2]);
-                float instrumentLat = float.Parse(fields[3]);
-                float instrumentLon = float.Parse(fields[4]);
-                float instrumentAlt = float.Parse(fields[5]);
-                float lowestLat = float.Parse(fields[6]);
-                float lowestLon = float.Parse(fields[7]);
-                float lowestElev = float.Parse(fields[8]);
-                float wgs84Elevation = float.Parse(fields[9]);
-                float rh2 = float.Parse(fields[10]);
-                float rh50 = float.Parse(fields[11]);
-                float rh98 = float.Parse(fields[12]);
-                string rhWaveform = fields[13];
-                string rawWaveformValues = fields[14];
-                string rawWaveformLengths = fields[15];
-                string rawWaveformPositions = fields[16];
+                if (fields.Count < 16) 
+                {
+                    Debug.LogError($"Incorrect number of fields in line {i} : {line}");
+                    continue;
+                }
 
-                // new data point and add it to the list
-                GEDIDataPoint dataPoint = new GEDIDataPoint(
-                    latitude, longitude, elevation, 
-                    instrumentLat, instrumentLon, instrumentAlt,
-                    lowestLat, lowestLon, lowestElev,
-                    wgs84Elevation, rh2, rh50, rh98, 
-                    rhWaveform, rawWaveformValues, rawWaveformLengths, 
-                    rawWaveformPositions
-                );
+                try {
+                    // Parse the fields
+                    float latitude = float.Parse(fields[0]);
+                    float longitude = float.Parse(fields[1]);
+                    float elevation = float.Parse(fields[2]);
+                    float instrumentLat = float.Parse(fields[3]);
+                    float instrumentLon = float.Parse(fields[4]);
+                    float instrumentAlt = float.Parse(fields[5]);
+                    float lowestLat = float.Parse(fields[6]);
+                    float lowestLon = float.Parse(fields[7]);
+                    float lowestElev = float.Parse(fields[8]);
+                    float wgs84Elevation = float.Parse(fields[9]);
+                    float rh2 = float.Parse(fields[10]);
+                    float rh50 = float.Parse(fields[11]);
+                    float rh98 = float.Parse(fields[12]);
+                    string rhWaveform = fields[13];
+                    string rawWaveformValues = fields[14];
+                    string rawWaveformLengths = fields[15];
+                    string rawWaveformPositions = fields[16];
 
-                dataPoints.Add(dataPoint);
+                    // new data point and add it to the list
+                    GEDIDataPoint dataPoint = new GEDIDataPoint(
+                        latitude, longitude, elevation, 
+                        instrumentLat, instrumentLon, instrumentAlt,
+                        lowestLat, lowestLon, lowestElev,
+                        wgs84Elevation, rh2, rh50, rh98, 
+                        rhWaveform, rawWaveformValues, rawWaveformLengths, 
+                        rawWaveformPositions
+                    );
+
+                    dataPoints.Add(dataPoint);
+                }
+                catch (System.Exception e) {
+                    Debug.LogError($"Error parsing line : {e.Message}");
+                }
             }
-            catch (System.Exception e) {
-                Debug.LogError($"Error parsing line {i}: {e.Message}");
-            }
-        }
+        }));
+
+        
+        // Debug.Log(dataPoints);
+
+        yield return null;
         
         // Debug.Log($"Loaded {dataPoints.Count} data points from CSV.");
     }

@@ -80,6 +80,10 @@ public class GEDITerrainCreator
                     // UV based on texture bounds
                     float u = (point.longitude - textureGeoBounds.x) / (textureGeoBounds.y - textureGeoBounds.x);
                     float v = (point.latitude - textureGeoBounds.z) / (textureGeoBounds.w - textureGeoBounds.z);
+                    Debug.Log(string.Format("UV: {0} {1}", u, v));
+                    // Debug.Log(string.Format("LngLat: {0} {1}", point.longitude, point.latitude));
+                    // Debug.Log(point.longitude);
+                    // Debug.Log(point.latitude);
                     uvs.Add(new Vector2(u, v));
                     
                     vertexIndexMap[vertexID] = vertices.Count - 1;
