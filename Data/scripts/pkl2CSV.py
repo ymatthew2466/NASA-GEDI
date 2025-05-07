@@ -9,7 +9,7 @@ import os
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-CONFIG_FILE_PATH = './yamls/bolivia_saltflats.yaml'
+CONFIG_FILE_PATH = './yamls/mapia_full.yaml'
 
 # ====== START YAML STUFF ======
 
@@ -141,6 +141,8 @@ print(f'Meters clipped above RH98: \t{CLIP_METERS_ABOVE_RH98}m')
 count = 0
 
 for i in range(len(data['prop'])):
+    if (i+1)%10!=0:
+        continue
     # print waveform count
     count += 1
     print(f'\rWaveforms processed: \t\t{count}', end='')
@@ -148,11 +150,11 @@ for i in range(len(data['prop'])):
     entry = data['prop'][i]
     prop_rh = data['prop_rh'][i]
     
-    # latitude = entry['geolocation/latitude_bin0']
-    # longitude = entry['geolocation/longitude_bin0']
+    latitude = entry['geolocation/latitude_bin0']
+    longitude = entry['geolocation/longitude_bin0']
 
-    latitude = prop_rh['lat_lowestmode']
-    longitude = prop_rh['lon_lowestmode']
+    # latitude = prop_rh['lat_lowestmode']
+    # longitude = prop_rh['lon_lowestmode']
 
 
     # elevation = entry['geolocation/elevation_bin0']

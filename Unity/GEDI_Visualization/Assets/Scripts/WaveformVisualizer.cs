@@ -7,7 +7,7 @@ using System;
 using TriangleNet.Geometry;
 using TriangleNet.Topology;
 using TriangleNet.Meshing;
-
+using System.Collections;
 
 using  GEDIGlobals; // loading global params and structs
 
@@ -63,17 +63,17 @@ public class WaveformVisualizer : MonoBehaviour
     
     
 
-    void Start()
+    IEnumerator Start()
     {
         referenceLongitude = (geoBounds.x + geoBounds.y)/2f;
         referenceLatitude = (geoBounds.z + geoBounds.w)/2f;
-        referenceElevation = 50f;  // haven't thought of a good way to set this
+        referenceElevation = 50f;  // placeholder
 
         if (csvParser != null)
         {
             if (csvParser.getDataPoints() == null || csvParser.getDataPoints().Count == 0)
             {
-                csvParser.loadCSV();
+                yield return StartCoroutine(csvParser.loadCSV());
             }
 
             List<CSVParser.GEDIDataPoint> dataPoints = csvParser.getDataPoints();
@@ -91,7 +91,6 @@ public class WaveformVisualizer : MonoBehaviour
             Debug.LogError("CSVParser is not assigned.");
         }
     }
-
 
     private Vector3 LatLong2Unity(float latitude, float longitude, float elevation)
     {
@@ -230,12 +229,12 @@ public class WaveformVisualizer : MonoBehaviour
         
         // create Unity mesh
         // calculate geographic bounds for UV mapping
-        float minLat = pointList.Min(p => p.latitude);
-        float maxLat = pointList.Max(p => p.latitude);
-        float minLon = pointList.Min(p => p.longitude);
-        float maxLon = pointList.Max(p => p.longitude);
+        // float minLat = pointList.Min(p => p.latitude);
+        // float maxLat = pointList.Max(p => p.latitude);
+        // float minLon = pointList.Min(p => p.longitude);
+        // float maxLon = pointList.Max(p => p.longitude);
         
-        Debug.Log($"Geographic bounds - Lat: {minLat} to {maxLat}, Lon: {minLon} to {maxLon}");
+        // Debug.Log($"Geographic bounds - Lat: {minLat} to {maxLat}, Lon: {minLon} to {maxLon}");
 
         // save both solid and wireframe as member variables
         terrainSolidGEDI = GEDITerrainCreator.generateSolid(polygon, pointMap, textureGeoBounds);
