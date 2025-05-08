@@ -133,6 +133,7 @@ public class WaveformVisualizer : MonoBehaviour
 
         GameObject waveformObject = new GameObject("WaveformCylinder");
         waveformObject.transform.position = position;
+        waveformObject.tag = "footprint";
 
         MeshFilter meshFilter = waveformObject.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = waveformObject.AddComponent<MeshRenderer>();
@@ -149,6 +150,7 @@ public class WaveformVisualizer : MonoBehaviour
         // cylinder mesh with slant
         Mesh mesh = WaveformTools.GenerateCylinderMesh(normalizedValues, dataPoint.rawWaveformLengths, dataPoint.rawWaveformPositions, slantDirection);
         meshFilter.mesh = mesh;
+        waveformObject.GetComponent<Renderer>().enabled = false;
 
         // float bottomOffset = 0.1172f * 76.8f * Params.SCALE; // CHECK
         Vector3 bottomPosition = new Vector3(

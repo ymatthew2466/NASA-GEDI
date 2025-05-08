@@ -173,7 +173,7 @@ MonoBehaviour:
   waveformEnergyThreshold: 0
   terrainTexture: {fileID: 2800000, guid: 9bbb1f81263005f4f80dce7ab2f5895e, type: 3}
   WireframeToggleGEDITerrain: {fileID: 507928775}
-  geoBounds: {x: -69, y: -68, z: -8.75, w: -7.75}
+  geoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
   textureGeoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
 --- !u!23 &66978046
 MeshRenderer:
@@ -466,7 +466,7 @@ MonoBehaviour:
   terrainMaterial: {fileID: 2100000, guid: 066189fb6b26b4b69a98f261e787fdde, type: 2}
   demSource: {fileID: 2800000, guid: 1da5afd16ad5d7148b07f337a8f38b5a, type: 3}
   demTexture: {fileID: 2800000, guid: 9bbb1f81263005f4f80dce7ab2f5895e, type: 3}
-  geoBounds: {x: -69, y: -68, z: -8.75, w: -7.75}
+  geoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
   textureBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
   resolution: 3000
   ToggleDemTerrain: {fileID: 198993749}
@@ -935,50 +935,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874600300}
   m_CullTransparentMesh: 1
---- !u!1 &1170935672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1170935674}
-  - component: {fileID: 1170935673}
-  m_Layer: 0
-  m_Name: ConfigManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1170935673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170935672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47957650bfd184fa79c8abe5223489bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1170935674
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170935672}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.6083, y: 375.11163, z: -12.594402}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1178201439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaf0b2df0d2f4ce3a6b76688fbc4d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: mapia_normalized_nosqrt.csv
+  filePath: mapia_full.csv
 --- !u!4 &1389572231
 Transform:
   m_ObjectHideFlags: 0
@@ -2066,4 +2022,3 @@ SceneRoots:
   - {fileID: 1623702782}
   - {fileID: 328148688}
   - {fileID: 324357109}
-  - {fileID: 1170935674}

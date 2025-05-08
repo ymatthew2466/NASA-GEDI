@@ -8,7 +8,7 @@ input:
 processing:
   adaptive_threshold: 0
   # [W, E, S, N]
-  geo_bounds: [-69.5, -68, -9.25, -7.75]  # mapia full
+  geo_bounds: [-69.3, -68.3, -9, -8]  # mapia full
   clip_meters_above_rh98: 5
   apply_square_root: False  # apply sqrt before normalization
 

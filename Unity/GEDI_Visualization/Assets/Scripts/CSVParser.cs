@@ -78,40 +78,22 @@ public class CSVParser : MonoBehaviour {
             }
         }
     }
-    IEnumerator LoadLines(string filePath, Action<string[]> callback)
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, filePath);
-
-        UnityWebRequest uwr = UnityWebRequest.Get(path);
-        yield return uwr.SendWebRequest();
-
-        if (uwr.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError("Error loading file: " + uwr.error);
-            callback(null);
-        }
-        else
-        {
-            string[] lines = uwr.downloadHandler.text.Split('\n');
-            callback(lines);
-        }
-    }
-
     public IEnumerator loadCSV()
     {
         this.dataPoints = new List<GEDIDataPoint>();
+
         string dataPath = Path.Combine(Application.streamingAssetsPath, filePath);
-        StartCoroutine(LoadLines(filePath, dataLines =>
+
+        using (var reader = new StreamReader(dataPath))
         {
-            Debug.Log(dataLines.Length);
-            for (int i = 1; i < dataLines.Length; i++)
+            while (!reader.EndOfStream)
             {
-                string line = dataLines[i];
+                string line = reader.ReadLine();
                 List<string> fields = ParseCSVLine(line);
 
                 if (fields.Count < 16) 
                 {
-                    Debug.LogError($"Incorrect number of fields in line {i} : {line}");
+                    // Debug.LogError($"Incorrect number of fields in line {i} : {line}");
                     continue;
                 }
 
@@ -151,10 +133,8 @@ public class CSVParser : MonoBehaviour {
                     Debug.LogError($"Error parsing line : {e.Message}");
                 }
             }
-        }));
+        };
 
-        
-        // Debug.Log(dataPoints);
 
         yield return null;
         

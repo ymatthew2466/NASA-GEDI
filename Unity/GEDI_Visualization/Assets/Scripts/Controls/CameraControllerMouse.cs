@@ -123,6 +123,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // Required for UI components
+using GEDIGlobals;
 
 public class CameraControllerMouse : MonoBehaviour
 {
@@ -136,7 +137,9 @@ public class CameraControllerMouse : MonoBehaviour
     private Vector3 cameraOffset;        // Camera offset from the target point
     private Vector3 lastMousePosition;   // Last mouse position for detecting movement
     private bool isRotating = false;     // To check if the right mouse button is held down
-
+    private Vector3 lastCameraPosition = Vector3.up * 1000f;
+    private float threshold = 100f; // update if movement is larger than 100 meters
+    public float maxRenderDistance = 5000f; // only objects within 50000 meters are visible
     void Start()
     {
         // Initialize camera offset
@@ -153,8 +156,30 @@ public class CameraControllerMouse : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+        
+        if ((transform.position - lastCameraPosition).sqrMagnitude > threshold * Params.SCALE)
+        {
+            lastCameraPosition = transform.position;
+            UpdateVisibleObjects();
+        }
     }
 
+    private void UpdateVisibleObjects()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("footprint");
+
+        Vector2 cameraPos = new Vector2(transform.position.x, transform.position.z);
+        foreach (GameObject obj in objects)
+        {
+            Vector2 objPos = new Vector2(obj.transform.position.x, obj.transform.position.z);
+
+            float dist = Vector2.Distance(cameraPos, objPos);
+            bool inView = dist < maxRenderDistance * Params.SCALE;
+
+
+            obj.GetComponent<Renderer>().enabled = inView;
+        }
+    }
     // Handle W, A, S, D movement
     void HandleMovement()
     {

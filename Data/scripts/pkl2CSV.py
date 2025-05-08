@@ -141,8 +141,6 @@ print(f'Meters clipped above RH98: \t{CLIP_METERS_ABOVE_RH98}m')
 count = 0
 
 for i in range(len(data['prop'])):
-    if (i+1)%10!=0:
-        continue
     # print waveform count
     count += 1
     print(f'\rWaveforms processed: \t\t{count}', end='')
