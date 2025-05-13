@@ -9,7 +9,7 @@ import os
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-CONFIG_FILE_PATH = './yamls/mapia_full.yaml'
+CONFIG_FILE_PATH = './yamls/mapia_partial.yaml'
 
 # ====== START YAML STUFF ======
 

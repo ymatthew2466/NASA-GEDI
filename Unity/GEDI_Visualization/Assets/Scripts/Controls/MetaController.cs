@@ -5,9 +5,9 @@ public class MetaController : MonoBehaviour
 {
     public Transform vrCamera;
     public Transform eye;
-    private Vector3 lastCameraPosition = Vector3.up * 1000f;
+    private Vector3 lastCameraPosition = Vector3.up * 1000f; 
     private float threshold = 100f; // update if movement is larger than 100 meters
-    public float maxRenderDistance = 20000f; // only objects within 50000 meters are visible
+    public float maxRenderDistance = 3000f; // only objects within 50000 meters are visible
     public float moveSpeed = 1f;  // Speed for movement on the left joystick
     public float riseSpeed = 0.6f;  // Speed for rise/descent on the right joystick
     public float rotateSpeed = 0.6f; // Rotation speed for turning on the right joystick

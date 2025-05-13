@@ -6661,7 +6661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaf0b2df0d2f4ce3a6b76688fbc4d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: mapia_full.csv
+  filePath: mapia_partial.csv
 --- !u!1 &1160347689
 GameObject:
   m_ObjectHideFlags: 0
@@ -8340,7 +8340,7 @@ MonoBehaviour:
   waveformEnergyThreshold: 0
   terrainTexture: {fileID: 2800000, guid: 9bbb1f81263005f4f80dce7ab2f5895e, type: 3}
   WireframeToggleGEDITerrain: {fileID: 0}
-  geoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
+  geoBounds: {x: -69.3, y: -68.6, z: -8.9, w: -8.2}
   textureGeoBounds: {x: -70, y: -68, z: -9.75, w: -7.75}
 --- !u!4 &1483737385
 Transform:

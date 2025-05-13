@@ -42,7 +42,7 @@ public class WaveformVisualizer : MonoBehaviour
     private const int GEDI_NUM_STATES = 3; // Total number of states
 
 
-    private bool enableWireframeGEDI = false; // Whether to render terrain as wireframe
+    // private bool enableWireframeGEDI = false; // Whether to render terrain as wireframe
     private Mesh terrainWireframeGEDI;
     private Mesh terrainSolidGEDI;
 
@@ -61,9 +61,8 @@ public class WaveformVisualizer : MonoBehaviour
     private float referenceElevation;
 
     
-    
 
-    IEnumerator Start()
+    void Start()
     {
         referenceLongitude = (geoBounds.x + geoBounds.y)/2f;
         referenceLatitude = (geoBounds.z + geoBounds.w)/2f;
@@ -73,7 +72,7 @@ public class WaveformVisualizer : MonoBehaviour
         {
             if (csvParser.getDataPoints() == null || csvParser.getDataPoints().Count == 0)
             {
-                yield return StartCoroutine(csvParser.loadCSV());
+                csvParser.loadCSV();
             }
 
             List<CSVParser.GEDIDataPoint> dataPoints = csvParser.getDataPoints();

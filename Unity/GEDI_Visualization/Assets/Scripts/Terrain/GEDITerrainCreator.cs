@@ -14,6 +14,7 @@ public class GEDITerrainCreator
         List<Vector3> wireframeVertices = new List<Vector3>();
         List<int> lineIndices = new List<int>();
         HashSet<string> processedEdges = new HashSet<string>();
+
         
         foreach (var triangle in polygon.Triangulate().Triangles)
         {
@@ -42,6 +43,7 @@ public class GEDITerrainCreator
         }
         
         Mesh unityMesh = new Mesh();
+        unityMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         unityMesh.vertices = wireframeVertices.ToArray();
         unityMesh.SetIndices(lineIndices.ToArray(), MeshTopology.Lines, 0);
         unityMesh.RecalculateBounds();
@@ -97,6 +99,7 @@ public class GEDITerrainCreator
         }
         
         Mesh unityMesh = new Mesh();
+        unityMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         unityMesh.vertices = vertices.ToArray();
         unityMesh.triangles = triangles.ToArray();
         unityMesh.uv = uvs.ToArray();
